@@ -1,1 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
+@theme {
+  --color-custom-yellow: #FFD814;
+}
