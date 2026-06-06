@@ -11,7 +11,7 @@ const SimpleSlider = () => {
         slidesToScroll:1
     };
     return(
-        <div className="max-w-screen-2xl mx-auto px-16 max-md:px-10 slider-container">
+        <div className="max-w-screen-2xl mx-auto px-16 max-md:px-7 slider-container">
             <Slider {...setting}>
                 <div className="h-[500px] max-lg:h-[400px] max-md:h-[250px] max-[500px]:h-[200px] max-[400px]:h-[150px]">
                     <img src="/slider image 1.webp" alt="slider 1" className="h-full"/>

@@ -3,3 +3,8 @@ export {default as HeaderTop} from "./HeaderTop";
 export {default as SearchInput} from "./SearchInput";
 export {default as SimpleSlider} from "./SimpleSlider";
 export {default as CategoryMenu} from "./CategoryMenu";
+export {default as ProductItem} from "./ProductItem";
+export {default as ProductSection} from "./ProductSection";
+export {default as Incentives} from "./Incentives";
+export {default as Newsletters} from "./Newsletter";
+export {default as Footer} from "./Footer";
