@@ -13,3 +13,5 @@ export {default as Filters} from "./Filters";
 export {default as Checkbox} from "./Checkbox";
 export {default as Range} from "./Range";
 export {default as RangeWithLabels} from "./RangeWithLabels";
+export {default as Products} from "./Products";
+export {default as Pagination} from "./Pagination";

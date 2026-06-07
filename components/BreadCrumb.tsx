@@ -3,7 +3,7 @@ import { FaHouse } from "react-icons/fa6";
 
 const BreadCrumb = () => {
     return (
-        <div className="text-lg breadcrumbs pb-10">
+        <div className="text-lg breadcrumbs pb-10 py-5 max-sm:test-base">
             <ul>
                 <li>
                     <Link href="/"><FaHouse className="mr-2"/> Home</Link>
