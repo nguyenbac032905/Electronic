@@ -15,3 +15,8 @@ export {default as Range} from "./Range";
 export {default as RangeWithLabels} from "./RangeWithLabels";
 export {default as Products} from "./Products";
 export {default as Pagination} from "./Pagination";
+export {default as SingleProductRate} from "./SingleProductRate";
+export {default as UrgencyText} from "./UrgencyText";
+export {default as StockAvailabillity} from "./StockAvailabillity";
+export {default as ColorInput} from "./ColorInput";
+export {default as QuantityInput} from "./QuantityInput";

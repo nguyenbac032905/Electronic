@@ -2,7 +2,7 @@ const SearchInput = () => {
     return(
         <form className="flex w-full justify-center">
             <input type="text" placeholder="Type here" className="input input-bordered w-[70%] w-[700px] max-[1320px]:w-[450px] rounded-r-none outline-none focus:outline-none max-sm:w-full" />
-            <button className="btn bg-custom-yellow rounded-l-none rounded-r-xl hover:bg-black hover:text-custom-yellow border-custom-yellow">Search</button>
+            <button className="btn bg-custom-yellow border-black rounded-l-none rounded-r-xl hover:bg-black hover:text-custom-yellow hover:border-custom-yellow">Search</button>
         </form>
     )
 }
