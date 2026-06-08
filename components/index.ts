@@ -20,3 +20,6 @@ export {default as UrgencyText} from "./UrgencyText";
 export {default as StockAvailabillity} from "./StockAvailabillity";
 export {default as ColorInput} from "./ColorInput";
 export {default as QuantityInput} from "./QuantityInput";
+export {default as ProductTabs} from "./ProductTabs";
+export {default as RatingPercentElement} from "./RatingPercentElement";
+export {default as SingleReview} from "./SingleReview";
