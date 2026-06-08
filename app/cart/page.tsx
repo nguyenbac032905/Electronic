@@ -1,3 +1,4 @@
+import { CustomButton } from "@/components";
 import Image from "next/image";
 import { FaCheck, FaCircleQuestion, FaClock, FaXmark } from "react-icons/fa6";
 
@@ -210,12 +211,7 @@ const CartPage = () => {
             </dl>
 
             <div className="mt-6">
-              <button
-                type="submit"
-                className="w-full rounded-md border border-custom-yellow bg-custom-yellow px-4 py-3 text-base font-bold text-black shadow-sm hover:bg-black hover:text-custom-yellow focus:outline-none focus:ring-2"
-              >
-                Checkout
-              </button>
+              <CustomButton textSize="base" buttonType="submit" paddingX={4} paddingY={3} text="Checkout" customWidth="full" />
             </div>
           </section>
         </form>
