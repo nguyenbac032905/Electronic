@@ -42,6 +42,7 @@ export type ProductMinAggregateOutputType = {
   price: number | null
   rating: number | null
   description: string | null
+  mainImage: string | null
 }
 
 export type ProductMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type ProductMaxAggregateOutputType = {
   price: number | null
   rating: number | null
   description: string | null
+  mainImage: string | null
 }
 
 export type ProductCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type ProductCountAggregateOutputType = {
   price: number
   rating: number
   description: number
+  mainImage: number
   _all: number
 }
 
@@ -78,6 +81,7 @@ export type ProductMinAggregateInputType = {
   price?: true
   rating?: true
   description?: true
+  mainImage?: true
 }
 
 export type ProductMaxAggregateInputType = {
@@ -86,6 +90,7 @@ export type ProductMaxAggregateInputType = {
   price?: true
   rating?: true
   description?: true
+  mainImage?: true
 }
 
 export type ProductCountAggregateInputType = {
@@ -94,6 +99,7 @@ export type ProductCountAggregateInputType = {
   price?: true
   rating?: true
   description?: true
+  mainImage?: true
   _all?: true
 }
 
@@ -189,6 +195,7 @@ export type ProductGroupByOutputType = {
   price: number
   rating: number
   description: string
+  mainImage: string
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
   _sum: ProductSumAggregateOutputType | null
@@ -220,6 +227,7 @@ export type ProductWhereInput = {
   price?: Prisma.IntFilter<"Product"> | number
   rating?: Prisma.IntFilter<"Product"> | number
   description?: Prisma.StringFilter<"Product"> | string
+  mainImage?: Prisma.StringFilter<"Product"> | string
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -228,6 +236,7 @@ export type ProductOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  mainImage?: Prisma.SortOrder
   _relevance?: Prisma.ProductOrderByRelevanceInput
 }
 
@@ -240,6 +249,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.IntFilter<"Product"> | number
   rating?: Prisma.IntFilter<"Product"> | number
   description?: Prisma.StringFilter<"Product"> | string
+  mainImage?: Prisma.StringFilter<"Product"> | string
 }, "id">
 
 export type ProductOrderByWithAggregationInput = {
@@ -248,6 +258,7 @@ export type ProductOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  mainImage?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
   _max?: Prisma.ProductMaxOrderByAggregateInput
@@ -264,6 +275,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   price?: Prisma.IntWithAggregatesFilter<"Product"> | number
   rating?: Prisma.IntWithAggregatesFilter<"Product"> | number
   description?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  mainImage?: Prisma.StringWithAggregatesFilter<"Product"> | string
 }
 
 export type ProductCreateInput = {
@@ -272,6 +284,7 @@ export type ProductCreateInput = {
   price?: number
   rating?: number
   description: string
+  mainImage: string
 }
 
 export type ProductUncheckedCreateInput = {
@@ -280,6 +293,7 @@ export type ProductUncheckedCreateInput = {
   price?: number
   rating?: number
   description: string
+  mainImage: string
 }
 
 export type ProductUpdateInput = {
@@ -288,6 +302,7 @@ export type ProductUpdateInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  mainImage?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -296,6 +311,7 @@ export type ProductUncheckedUpdateInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  mainImage?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductCreateManyInput = {
@@ -304,6 +320,7 @@ export type ProductCreateManyInput = {
   price?: number
   rating?: number
   description: string
+  mainImage: string
 }
 
 export type ProductUpdateManyMutationInput = {
@@ -312,6 +329,7 @@ export type ProductUpdateManyMutationInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  mainImage?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductUncheckedUpdateManyInput = {
@@ -320,6 +338,7 @@ export type ProductUncheckedUpdateManyInput = {
   price?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  mainImage?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductOrderByRelevanceInput = {
@@ -334,6 +353,7 @@ export type ProductCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  mainImage?: Prisma.SortOrder
 }
 
 export type ProductAvgOrderByAggregateInput = {
@@ -347,6 +367,7 @@ export type ProductMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  mainImage?: Prisma.SortOrder
 }
 
 export type ProductMinOrderByAggregateInput = {
@@ -355,6 +376,7 @@ export type ProductMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  mainImage?: Prisma.SortOrder
 }
 
 export type ProductSumOrderByAggregateInput = {
@@ -382,6 +404,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   price?: boolean
   rating?: boolean
   description?: boolean
+  mainImage?: boolean
 }, ExtArgs["result"]["product"]>
 
 
@@ -392,9 +415,10 @@ export type ProductSelectScalar = {
   price?: boolean
   rating?: boolean
   description?: boolean
+  mainImage?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "price" | "rating" | "description", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "price" | "rating" | "description" | "mainImage", ExtArgs["result"]["product"]>
 
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
@@ -405,6 +429,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     price: number
     rating: number
     description: string
+    mainImage: string
   }, ExtArgs["result"]["product"]>
   composites: {}
 }
@@ -779,6 +804,7 @@ export interface ProductFieldRefs {
   readonly price: Prisma.FieldRef<"Product", 'Int'>
   readonly rating: Prisma.FieldRef<"Product", 'Int'>
   readonly description: Prisma.FieldRef<"Product", 'String'>
+  readonly mainImage: Prisma.FieldRef<"Product", 'String'>
 }
     
 

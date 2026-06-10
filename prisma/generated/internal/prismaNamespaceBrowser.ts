@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Product: 'Product'
+  Product: 'Product',
+  Image: 'Image'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -75,10 +76,20 @@ export const ProductScalarFieldEnum = {
   title: 'title',
   price: 'price',
   rating: 'rating',
-  description: 'description'
+  description: 'description',
+  mainImage: 'mainImage'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ImageScalarFieldEnum = {
+  imageID: 'imageID',
+  articleID: 'articleID',
+  image: 'image'
+} as const
+
+export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -92,8 +103,18 @@ export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 export const ProductOrderByRelevanceFieldEnum = {
   id: 'id',
   title: 'title',
-  description: 'description'
+  description: 'description',
+  mainImage: 'mainImage'
 } as const
 
 export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
+
+
+export const ImageOrderByRelevanceFieldEnum = {
+  imageID: 'imageID',
+  articleID: 'articleID',
+  image: 'image'
+} as const
+
+export type ImageOrderByRelevanceFieldEnum = (typeof ImageOrderByRelevanceFieldEnum)[keyof typeof ImageOrderByRelevanceFieldEnum]
 
