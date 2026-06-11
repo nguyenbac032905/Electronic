@@ -4,12 +4,14 @@ import Image from "next/image";
 import { FaCheck, FaClock, FaCircleQuestion, FaXmark } from "react-icons/fa6";
 import { useProductStore } from "../_zustand/store";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
     const { products,removeFromCart,calculateTotals } = useProductStore();
     const handleRemoveItem = (id: number) => {
         removeFromCart(id);
         calculateTotals();
+        toast.success("Product removed from the cart!");
     }
     return (
         <div className="bg-white">
