@@ -1,3 +1,4 @@
+
 import {create} from "zustand";
 
 export type ProductInCart = {
@@ -9,17 +10,22 @@ export type ProductInCart = {
 };
 
 export type State = {
-    products: ProductInCart[]
+    products: ProductInCart[];
+    allQuantity: number;
+    total: number;
 };
 
 export type Actions = {
-    addToCart: (newProduct: ProductInCart) => void,
-    updateCartAmount: (id: number, quantity:number) => void,
-    removeFromCart: (id: number) => void
+    addToCart: (newProduct: ProductInCart) => void;
+    updateCartAmount: (id: number, quantity:number) => void;
+    removeFromCart: (id: number) => void;
+    calculateTotals: () => void;
 };
 
 export const useProductStore = create<State & Actions>((set) => ({
     products:[],
+    allQuantity: 0,
+    total: 0,
     addToCart: (newProduct) => {
         set(state => {
             const existItem = state.products.find(item => item.id === newProduct.id);
@@ -53,5 +59,16 @@ export const useProductStore = create<State & Actions>((set) => ({
         set((state) => ({
             products: state.products.filter(product => product.id !==id)
         }))
+    },
+    calculateTotals: () => {
+        set((state) => {
+            let amount = 0;
+            let total = 0;
+            state.products.forEach(product => {
+                amount += product.amount;
+                total += product.amount*product.price;
+            })
+            return {products: state.products, allQuantity: amount, total: total};
+        })
     }
 }));

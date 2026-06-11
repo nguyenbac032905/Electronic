@@ -1,7 +1,6 @@
 import Image from "next/image";
-import HeaderTop from "./HeaderTop";
-import SearchInput from "./SearchInput";
-import { FaCartShopping, FaCodeCompare, FaHeart } from "react-icons/fa6";
+import {HeaderTop,SearchInput, CartElement} from "@/components";
+import { FaCodeCompare, FaHeart } from "react-icons/fa6";
 import Link from "next/link";
 
 const Header = () => {
@@ -21,10 +20,7 @@ const Header = () => {
                         <FaHeart className="text-2xl"/>
                         <span className="block w-5 h-5 bg-custom-yellow rounded-full flex justify-center items-center absolute top-[-10px] right-[-20px]">2</span>
                     </div>
-                    <Link href={"/cart"} className="relative">
-                        <FaCartShopping className="text-2xl"/>
-                        <span className="block w-5 h-5 bg-custom-yellow rounded-full flex justify-center items-center absolute top-[-10px] right-[-20px]">2</span>
-                    </Link>
+                    <CartElement />
                 </div>
             </div>
         </header>

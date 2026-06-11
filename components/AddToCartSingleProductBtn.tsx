@@ -7,7 +7,7 @@ interface AddToCartSingleProductBtnProps{
 }
 
 const AddToCartSingleProductBtn = ({product,quantityCount}: AddToCartSingleProductBtnProps) => {
-    const {addToCart} = useProductStore();
+    const {addToCart,calculateTotals} = useProductStore();
     const handleAddToCart = () => {
         addToCart({
             id: product?.id,
@@ -15,7 +15,8 @@ const AddToCartSingleProductBtn = ({product,quantityCount}: AddToCartSingleProdu
             price: product?.price,
             image: product?.mainImage,
             amount: quantityCount
-        })
+        });
+        calculateTotals();
     }
     return (
         <button onClick={handleAddToCart} className="btn w-[200px] border border-black border-2 font-normal bg-white hover:bg-black hover:text-white transition-colors rounded-md uppercase ease-in">

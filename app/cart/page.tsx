@@ -6,7 +6,11 @@ import { useProductStore } from "../_zustand/store";
 import Link from "next/link";
 
 const CartPage = () => {
-    const { products,removeFromCart } = useProductStore();
+    const { products,removeFromCart,calculateTotals } = useProductStore();
+    const handleRemoveItem = (id: number) => {
+        removeFromCart(id);
+        calculateTotals();
+    }
     return (
         <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -65,7 +69,7 @@ const CartPage = () => {
                             <button
                                 type="button"
                                 className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
-                                onClick={() => removeFromCart(product.id)}
+                                onClick={() => handleRemoveItem(product.id)}
                             >
                                 <span className="sr-only">Remove</span>
                                 <FaXmark className="h-5 w-5" aria-hidden="true" />
