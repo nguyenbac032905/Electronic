@@ -7,20 +7,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(users);
 }
 
-export async function POST(request: NextRequest) {
-    const body = await request.json();
-    const newProduct = await prisma.product.create({
-        data: {
-            title: body.title,
-            price: body.price,
-            rating: body.rating,
-            description: body.description,
-            mainImage: body.mainImage
-        }
-    });
+// export async function POST(request: NextRequest) {
+//     const body = await request.json();
+//     const newProduct = await prisma.product.create({
+//         data: {
+//             title: body.title,
+//             price: body.price,
+//             rating: body.rating,
+//             description: body.description,
+//             mainImage: body.mainImage
+//         }
+//     });
 
-    return NextResponse.json(newProduct,{status: 201})
-}
+//     return NextResponse.json(newProduct,{status: 201})
+// }
 
 // export async function POST(request:NextRequest){
 //     const body = await request.json();

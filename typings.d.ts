@@ -5,4 +5,10 @@ interface Product {
     rating: number;
     description: string;
     mainImage: string;
+    slug: string;
+}
+interface SingleProductPageProps {
+    params: {
+        productSlug: string
+    }
 }
