@@ -123,7 +123,7 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                 </div>
             </div>
             <div className="py-16">
-                <ProductTabs />
+                <ProductTabs product={product}/>
             </div>
         </>
   );

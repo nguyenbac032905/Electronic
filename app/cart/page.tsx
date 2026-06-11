@@ -1,47 +1,12 @@
+"use client"
 import { CustomButton } from "@/components";
 import Image from "next/image";
-import { FaCheck, FaCircleQuestion, FaClock, FaXmark } from "react-icons/fa6";
-
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Sienna",
-    inStock: true,
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in sienna.",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Black",
-    inStock: false,
-    leadTime: "3–4 weeks",
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  {
-    id: 3,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35.00",
-    color: "White",
-    inStock: true,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-  },
-];
+import { FaCheck, FaCircleQuestion, FaClock, FaXmark } from "react-icons/fa6"; 
+import { useProductStore } from "../_zustand/store";
+import Link from "next/link";
 
 const CartPage = () => {
+  const {products} = useProductStore();
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -75,22 +40,22 @@ const CartPage = () => {
                       <div>
                         <div className="flex justify-between">
                           <h3 className="text-sm">
-                            <a
-                              href={product.href}
+                            <Link
+                              href={"#"}
                               className="font-medium text-gray-700 hover:text-gray-800"
                             >
-                              {product.name}
-                            </a>
+                              {product.title}
+                            </Link>
                           </h3>
                         </div>
-                        <div className="mt-1 flex text-sm">
+                        {/* <div className="mt-1 flex text-sm">
                           <p className="text-gray-500">{product.color}</p>
                           {product.size ? (
                             <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
                               {product.size}
                             </p>
                           ) : null}
-                        </div>
+                        </div> */}
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           {product.price}
                         </p>
@@ -98,14 +63,14 @@ const CartPage = () => {
 
                       <div className="mt-4 sm:mt-0 sm:pr-9">
                         <label
-                          htmlFor={`quantity-${productIdx}`}
+                          htmlFor={`quantity-${product.id}`}
                           className="sr-only"
                         >
-                          Quantity, {product.name}
+                          Quantity, {product.title}
                         </label>
                         <select
-                          id={`quantity-${productIdx}`}
-                          name={`quantity-${productIdx}`}
+                          id={`quantity-${product.id}`}
+                          name={`quantity-${product.id}`}
                           className="w-15 max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         >
                           <option value={1}>1</option>
@@ -131,7 +96,7 @@ const CartPage = () => {
                     </div>
 
                     <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                      {product.inStock ? (
+                      {1 ? (
                         <FaCheck
                           className="h-5 w-5 flex-shrink-0 text-green-500"
                           aria-hidden="true"
@@ -144,9 +109,7 @@ const CartPage = () => {
                       )}
 
                       <span>
-                        {product.inStock
-                          ? "In stock"
-                          : `Ships in ${product.leadTime}`}
+                        {1 ? "In stock":`Ships in 3 days`}
                       </span>
                     </p>
                   </div>

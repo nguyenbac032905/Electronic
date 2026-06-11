@@ -2,7 +2,7 @@
 import { useState } from "react";
 import {RatingPercentElement, SingleReview} from "@/components";
 
-const ProductTabs = () => {
+const ProductTabs = ({product}:{product: Product}) => {
     const [currentProductTab, setCurrentProductTab] = useState<number>(0);
     return (
         <div className="px-5">
@@ -20,10 +20,7 @@ const ProductTabs = () => {
             <div className="pt-5">
                 {currentProductTab === 0 && (
                     <p className="text-lg max-sm:text-base max-sm:text-sm">
-                        Desc - Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Laborum ad illo recusandae eveniet nulla dignissimos, asperiores
-                        vero aliquid nemo ab excepturi dolores? Commodi quas vitae,
-                        laboriosam unde distinctio fugiat reprehenderit!
+                        {product.description}
                     </p>
                 )}
                 {currentProductTab === 1 && (
