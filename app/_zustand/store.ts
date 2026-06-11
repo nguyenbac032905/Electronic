@@ -5,6 +5,7 @@ export type ProductInCart = {
     title: string;
     price: number;
     image: string;
+    amount: number;
 };
 
 export type State = {
@@ -16,24 +17,23 @@ export type Actions = {
 };
 
 export const useProductStore = create<State & Actions>((set) => ({
-    products:[
-        {
-            id: 1,
-            title: "Product 1",
-            price: 22,
-            image: "product1.webp"
-        },
-        {
-            id: 2,
-            title: "Product 2",
-            price: 32,
-            image: "product2.webp"
-        },
-    ],
+    products:[],
     addToCart: (newProduct) => {
         set(state => {
-            console.log(state)
-            return {products: [...state.products,newProduct]}
+            console.log(state.products);
+            const existItem = state.products.find(item => item.id === newProduct.id);
+            if(!existItem){
+                return {products: [...state.products,newProduct]}
+            }
+            return {
+                products: state.products.map(product =>{
+                    if(product.id === existItem.id){
+                        return {...product,amount: product.amount+newProduct.amount}
+                    }else{
+                        return product
+                    }
+                })
+            }
         })
     }
 }));

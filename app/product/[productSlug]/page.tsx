@@ -1,4 +1,6 @@
 import {
+    AddToCartSingleProductBtn,
+  BuyNowSingleProductBtn,
   ColorInput,
   ProductTabs,
   QuantityInput,
@@ -68,12 +70,8 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                     <ColorInput />
                     <QuantityInput />
                     <div className="flex gap-x-5">
-                        <button className="btn w-[200px] border border-black border-2 font-normal bg-white hover:bg-black hover:text-white transition-colors rounded-md uppercase ease-in">
-                        Add to cart
-                        </button>
-                        <button className="btn w-[200px] border border-black border-2 font-normal bg-custom-yellow hover:bg-black hover:text-white transition-colors rounded-md uppercase ease-in">
-                        Buy now
-                        </button>
+                        <AddToCartSingleProductBtn product={product}/>
+                        <BuyNowSingleProductBtn />
                     </div>
                     <div className="flex flex-col gap-y-2">
                         <p className="flex items-center gap-x-2">

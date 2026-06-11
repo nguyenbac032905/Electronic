@@ -21,10 +21,10 @@ const Header = () => {
                         <FaHeart className="text-2xl"/>
                         <span className="block w-5 h-5 bg-custom-yellow rounded-full flex justify-center items-center absolute top-[-10px] right-[-20px]">2</span>
                     </div>
-                    <div className="relative">
+                    <Link href={"/cart"} className="relative">
                         <FaCartShopping className="text-2xl"/>
                         <span className="block w-5 h-5 bg-custom-yellow rounded-full flex justify-center items-center absolute top-[-10px] right-[-20px]">2</span>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </header>
