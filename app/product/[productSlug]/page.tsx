@@ -4,6 +4,7 @@ import {
   ColorInput,
   ProductTabs,
   QuantityInput,
+  SingleProductDynamicFields,
   SingleProductRate,
   StockAvailabillity,
   UrgencyText,
@@ -67,12 +68,7 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                     <p className="text-xl font-semibold">${product.price}</p>
                     <UrgencyText stock={90} />
                     <StockAvailabillity stock={90} />
-                    <ColorInput />
-                    <QuantityInput />
-                    <div className="flex gap-x-5">
-                        <AddToCartSingleProductBtn product={product}/>
-                        <BuyNowSingleProductBtn />
-                    </div>
+                    <SingleProductDynamicFields product={product}/>
                     <div className="flex flex-col gap-y-2">
                         <p className="flex items-center gap-x-2">
                         <FaHeart />

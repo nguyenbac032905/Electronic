@@ -1,14 +1,18 @@
 "use client"
-import { useState } from "react";
+import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
-const QuantityInput = () => {
-    const [quantityCount, setQuantityCount] = useState<number>(1);
+interface QuantityInputProps {
+    quantityCount:number;
+    setQuantityCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const QuantityInput = ({quantityCount,setQuantityCount}: QuantityInputProps) => {
     const handleChangeQuantity = (actionName: string) => {
         if(actionName === "plus"){
-            setQuantityCount(quantityCount+1);
-        }else if(actionName === "minus" && quantityCount > 1){
-            setQuantityCount(quantityCount-1);
+            setQuantityCount(prev => prev+1);
+        }else{
+            setQuantityCount(prev => Math.max(1,prev-1));
         }
     }
     return (

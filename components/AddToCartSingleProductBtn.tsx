@@ -1,7 +1,12 @@
 "use client"
 import { useProductStore } from "@/app/_zustand/store";
 
-const AddToCartSingleProductBtn = ({product}: {product: Product}) => {
+interface AddToCartSingleProductBtnProps{
+    product: Product;
+    quantityCount: number;
+}
+
+const AddToCartSingleProductBtn = ({product,quantityCount}: AddToCartSingleProductBtnProps) => {
     const {addToCart} = useProductStore();
     const handleAddToCart = () => {
         addToCart({
@@ -9,7 +14,7 @@ const AddToCartSingleProductBtn = ({product}: {product: Product}) => {
             title: product?.title,
             price: product?.price,
             image: product?.mainImage,
-            amount: 1
+            amount: quantityCount
         })
     }
     return (
