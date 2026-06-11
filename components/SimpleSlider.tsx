@@ -2,6 +2,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 const SimpleSlider = () => {
     const setting = {
         dots: true,
@@ -18,7 +19,7 @@ const SimpleSlider = () => {
                         <p className="text-xl font-light underline underline-offset-4 mb-5 max-[1162px]:text-lg max-lg:mb-2 max-md:text-base max-md:mb-1">Headphones</p>
                         <h2 className="text-5xl font-light mb-5 max-[1162px]:text-4xl max-lg:mb-2 max-lg:text-3xl max-md:text-2xl max-md:mb-1">Just to rock your mood</h2>
                         <p className="mb-5 text-lg font-medium max-[1162px]:text-base max-lg:mb-2 max-lg:text-sm max-md:mb-1">Fine-tune your listening experience by using the convenient volume slider to adjust sound intensity to your preference.</p>
-                        <button className="btn w-52 h-14 bg-custom-yellow border border-black uppercase text-xl hover:bg-black hover:text-custom-yellow max-[1162px]:w-44 max-[1162px]:h-10 max-[1162px]:text-lg max-lg:text-base max-lg:w-36 max-md:text-sm max-md:w-32">Shop now</button>
+                        <Link href={"/shop"} className="btn w-52 h-14 bg-custom-yellow border border-black uppercase text-xl hover:bg-black hover:text-custom-yellow max-[1162px]:w-44 max-[1162px]:h-10 max-[1162px]:text-lg max-lg:text-base max-lg:w-36 max-md:text-sm max-md:w-32">Shop now</Link>
                     </div>
                     <img src="/slider image 1.webp" alt="slider 1" className="w-full h-full object-cover"/>
                 </div>
@@ -33,9 +34,9 @@ const SimpleSlider = () => {
                         <p className="mb-5 text-black text-lg font-medium max-[1162px]:text-base max-lg:mb-2 max-lg:text-sm max-md:mb-1">
                             Seamlessly control your sound world by sliding the volume to your perfect level.
                         </p>
-                        <button className="bg-custom-yellow btn w-52 h-14 text-black uppercase border border-black text-xl hover:bg-black hover:text-custom-yellow max-[1162px]:w-44 max-[1162px]:h-10 max-[1162px]:text-lg max-lg:text-base max-lg:w-36 max-md:text-sm max-md:w-32">
+                        <Link href="/shop" className="bg-custom-yellow btn w-52 h-14 text-black uppercase border border-black text-xl hover:bg-black hover:text-custom-yellow max-[1162px]:w-44 max-[1162px]:h-10 max-[1162px]:text-lg max-lg:text-base max-lg:w-36 max-md:text-sm max-md:w-32">
                             Shop now
-                        </button>
+                        </Link>
                     </div>
                     <img src="/slider image 2.webp" alt="slider 2" className="h-full"/>
                 </div>

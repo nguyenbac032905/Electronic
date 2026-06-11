@@ -14,6 +14,7 @@ model Product{
     rating Int @default(0)
     description String
     mainImage String
+    slug String @unique
 }
 
 model Image {
