@@ -1,14 +1,71 @@
+"use client"
 import { CustomButton } from "@/components";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
+    const [error, setError] = useState<string>("");
+    const router = useRouter();
+
+    const {data: session, status: sessionStatus} = useSession();
+    useEffect(() => {
+        if(sessionStatus === "authenticated"){
+            router.replace("/");
+        }
+    },[sessionStatus,router])
+
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        return emailRegex.test(email);
+    };
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        
+        if(!isValidEmail(email)){
+            toast.error("Email is invalid");
+            setError("Email is invalid");
+            return;
+        }
+
+        if(!password || password.length < 8){
+            setError("Password is invalid");
+            toast.error("Password is invalid");
+            return;
+        }
+
+        const res = await signIn("credentials",{
+            redirect: false,
+            email,
+            password
+        });
+
+        if(res?.error){
+            setError("Invalid email or password");
+            toast.error("Invalid email or password");
+            return;
+        }else{
+            setError("");
+            toast.success("Successful login");
+            router.push("/");
+        }
+    }
+
+    if(sessionStatus === "loading"){
+        return <h1>loading...</h1>
+    }
     return(
         <div className="flex flex-col min-h-full flex-1 justify-center py-12 lg:px-8 sm:px-6">
             <div className="flex flex-col items-center justify-center">
                 <h2 className="mt-6 text-center text-2xl text-gray-900">Sign in to your account</h2>
             </div>
             <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-[480px] bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email">Email Address:</label>
                         <div className="mt-2">
@@ -31,8 +88,8 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <div>
-                        <CustomButton text="Sign Up" paddingX={4} paddingY={2} customWidth="full" textSize="base" buttonType="submit"/>
-                        <p className="text-red-600 text-center text-[16px] my-4">{false && "error"}</p>
+                        <CustomButton text="Sign In" paddingX={4} paddingY={2} customWidth="full" textSize="base" buttonType="submit"/>
+                        <p className="text-red-600 text-center text-[16px] my-4">{error && error}</p>
                     </div>
                     <div>
                         <div className="relative mt-10">
@@ -45,12 +102,13 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <div className="mt-6 grid grid-cols-2 gap-4">
-                        <button className="cursor-pointer flex w-full items-center border border-gray-300 justify-center gap-3 rounded-md bg-white px-3 py-1.5 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                        <button type="button" onClick={() => signIn("google")} className="cursor-pointer flex w-full items-center border border-gray-300 justify-center gap-3 rounded-md bg-white px-3 py-1.5 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                             <FcGoogle />
                             <span className="text-sm font-semibold leading-6">Google</span>
                         </button>
-                        <a
-                            href="#"
+                        <button
+                            type="button"
+                            onClick={() => signIn("github")}
                             className="flex w-full items-center justify-center gap-3 rounded-md bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
                         >
                             <svg
@@ -66,7 +124,7 @@ const LoginPage = () => {
                                 />
                             </svg>
                             <span className="text-sm font-semibold leading-6">GitHub</span>
-                        </a>
+                        </button>
                     </div>
                 </form>
             </div>
