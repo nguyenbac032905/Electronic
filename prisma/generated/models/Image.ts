@@ -26,19 +26,19 @@ export type AggregateImage = {
 
 export type ImageMinAggregateOutputType = {
   imageID: string | null
-  articleID: string | null
+  productID: string | null
   image: string | null
 }
 
 export type ImageMaxAggregateOutputType = {
   imageID: string | null
-  articleID: string | null
+  productID: string | null
   image: string | null
 }
 
 export type ImageCountAggregateOutputType = {
   imageID: number
-  articleID: number
+  productID: number
   image: number
   _all: number
 }
@@ -46,19 +46,19 @@ export type ImageCountAggregateOutputType = {
 
 export type ImageMinAggregateInputType = {
   imageID?: true
-  articleID?: true
+  productID?: true
   image?: true
 }
 
 export type ImageMaxAggregateInputType = {
   imageID?: true
-  articleID?: true
+  productID?: true
   image?: true
 }
 
 export type ImageCountAggregateInputType = {
   imageID?: true
-  articleID?: true
+  productID?: true
   image?: true
   _all?: true
 }
@@ -137,7 +137,7 @@ export type ImageGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type ImageGroupByOutputType = {
   imageID: string
-  articleID: string
+  productID: string
   image: string
   _count: ImageCountAggregateOutputType | null
   _min: ImageMinAggregateOutputType | null
@@ -164,13 +164,13 @@ export type ImageWhereInput = {
   OR?: Prisma.ImageWhereInput[]
   NOT?: Prisma.ImageWhereInput | Prisma.ImageWhereInput[]
   imageID?: Prisma.StringFilter<"Image"> | string
-  articleID?: Prisma.StringFilter<"Image"> | string
+  productID?: Prisma.StringFilter<"Image"> | string
   image?: Prisma.StringFilter<"Image"> | string
 }
 
 export type ImageOrderByWithRelationInput = {
   imageID?: Prisma.SortOrder
-  articleID?: Prisma.SortOrder
+  productID?: Prisma.SortOrder
   image?: Prisma.SortOrder
   _relevance?: Prisma.ImageOrderByRelevanceInput
 }
@@ -180,13 +180,13 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ImageWhereInput | Prisma.ImageWhereInput[]
   OR?: Prisma.ImageWhereInput[]
   NOT?: Prisma.ImageWhereInput | Prisma.ImageWhereInput[]
-  articleID?: Prisma.StringFilter<"Image"> | string
+  productID?: Prisma.StringFilter<"Image"> | string
   image?: Prisma.StringFilter<"Image"> | string
 }, "imageID">
 
 export type ImageOrderByWithAggregationInput = {
   imageID?: Prisma.SortOrder
-  articleID?: Prisma.SortOrder
+  productID?: Prisma.SortOrder
   image?: Prisma.SortOrder
   _count?: Prisma.ImageCountOrderByAggregateInput
   _max?: Prisma.ImageMaxOrderByAggregateInput
@@ -198,49 +198,49 @@ export type ImageScalarWhereWithAggregatesInput = {
   OR?: Prisma.ImageScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ImageScalarWhereWithAggregatesInput | Prisma.ImageScalarWhereWithAggregatesInput[]
   imageID?: Prisma.StringWithAggregatesFilter<"Image"> | string
-  articleID?: Prisma.StringWithAggregatesFilter<"Image"> | string
+  productID?: Prisma.StringWithAggregatesFilter<"Image"> | string
   image?: Prisma.StringWithAggregatesFilter<"Image"> | string
 }
 
 export type ImageCreateInput = {
   imageID?: string
-  articleID: string
+  productID: string
   image: string
 }
 
 export type ImageUncheckedCreateInput = {
   imageID?: string
-  articleID: string
+  productID: string
   image: string
 }
 
 export type ImageUpdateInput = {
   imageID?: Prisma.StringFieldUpdateOperationsInput | string
-  articleID?: Prisma.StringFieldUpdateOperationsInput | string
+  productID?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ImageUncheckedUpdateInput = {
   imageID?: Prisma.StringFieldUpdateOperationsInput | string
-  articleID?: Prisma.StringFieldUpdateOperationsInput | string
+  productID?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ImageCreateManyInput = {
   imageID?: string
-  articleID: string
+  productID: string
   image: string
 }
 
 export type ImageUpdateManyMutationInput = {
   imageID?: Prisma.StringFieldUpdateOperationsInput | string
-  articleID?: Prisma.StringFieldUpdateOperationsInput | string
+  productID?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ImageUncheckedUpdateManyInput = {
   imageID?: Prisma.StringFieldUpdateOperationsInput | string
-  articleID?: Prisma.StringFieldUpdateOperationsInput | string
+  productID?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -252,19 +252,19 @@ export type ImageOrderByRelevanceInput = {
 
 export type ImageCountOrderByAggregateInput = {
   imageID?: Prisma.SortOrder
-  articleID?: Prisma.SortOrder
+  productID?: Prisma.SortOrder
   image?: Prisma.SortOrder
 }
 
 export type ImageMaxOrderByAggregateInput = {
   imageID?: Prisma.SortOrder
-  articleID?: Prisma.SortOrder
+  productID?: Prisma.SortOrder
   image?: Prisma.SortOrder
 }
 
 export type ImageMinOrderByAggregateInput = {
   imageID?: Prisma.SortOrder
-  articleID?: Prisma.SortOrder
+  productID?: Prisma.SortOrder
   image?: Prisma.SortOrder
 }
 
@@ -272,7 +272,7 @@ export type ImageMinOrderByAggregateInput = {
 
 export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   imageID?: boolean
-  articleID?: boolean
+  productID?: boolean
   image?: boolean
 }, ExtArgs["result"]["image"]>
 
@@ -280,18 +280,18 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 
 export type ImageSelectScalar = {
   imageID?: boolean
-  articleID?: boolean
+  productID?: boolean
   image?: boolean
 }
 
-export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"imageID" | "articleID" | "image", ExtArgs["result"]["image"]>
+export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"imageID" | "productID" | "image", ExtArgs["result"]["image"]>
 
 export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Image"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     imageID: string
-    articleID: string
+    productID: string
     image: string
   }, ExtArgs["result"]["image"]>
   composites: {}
@@ -663,7 +663,7 @@ export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface ImageFieldRefs {
   readonly imageID: Prisma.FieldRef<"Image", 'String'>
-  readonly articleID: Prisma.FieldRef<"Image", 'String'>
+  readonly productID: Prisma.FieldRef<"Image", 'String'>
   readonly image: Prisma.FieldRef<"Image", 'String'>
 }
     

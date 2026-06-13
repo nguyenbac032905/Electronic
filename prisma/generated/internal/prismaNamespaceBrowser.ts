@@ -79,7 +79,9 @@ export const ProductScalarFieldEnum = {
   rating: 'rating',
   description: 'description',
   mainImage: 'mainImage',
-  slug: 'slug'
+  slug: 'slug',
+  manufacturer: 'manufacturer',
+  category: 'category'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -87,7 +89,7 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 
 export const ImageScalarFieldEnum = {
   imageID: 'imageID',
-  articleID: 'articleID',
+  productID: 'productID',
   image: 'image'
 } as const
 
@@ -116,7 +118,9 @@ export const ProductOrderByRelevanceFieldEnum = {
   title: 'title',
   description: 'description',
   mainImage: 'mainImage',
-  slug: 'slug'
+  slug: 'slug',
+  manufacturer: 'manufacturer',
+  category: 'category'
 } as const
 
 export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
@@ -124,7 +128,7 @@ export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFi
 
 export const ImageOrderByRelevanceFieldEnum = {
   imageID: 'imageID',
-  articleID: 'articleID',
+  productID: 'productID',
   image: 'image'
 } as const
 

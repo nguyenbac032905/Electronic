@@ -20,7 +20,7 @@ const ProductTabs = ({product}:{product: Product}) => {
             <div className="pt-5">
                 {currentProductTab === 0 && (
                     <p className="text-lg max-sm:text-base max-sm:text-sm">
-                        {product.description}
+                        {product?.description}
                     </p>
                 )}
                 {currentProductTab === 1 && (
@@ -28,12 +28,12 @@ const ProductTabs = ({product}:{product: Product}) => {
                         <table className="table text-xl text-center max-[500px]:text-base">
                             <tbody>
                                 <tr>
-                                    <th>Vendor:</th>
-                                    <td>Lenovo</td>
+                                    <th>Manufacturer:</th>
+                                    <td>{product?.manufacturer}</td>
                                 </tr>
                                 <tr>
                                     <th>Category:</th>
-                                    <td>Laptop</td>
+                                    <td>{product?.category || "No category"}</td>
                                 </tr>
                                 <tr>
                                     <th>Color:</th>

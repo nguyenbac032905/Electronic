@@ -1,9 +1,5 @@
 import {
-    AddToCartSingleProductBtn,
-  BuyNowSingleProductBtn,
-  ColorInput,
   ProductTabs,
-  QuantityInput,
   SingleProductDynamicFields,
   SingleProductRate,
   StockAvailabillity,
@@ -18,13 +14,27 @@ import {
   FaSquareXTwitter,
 } from "react-icons/fa6";
 
+interface ImageItem {
+    imageID: string;
+    productID: string;
+    image: string
+}
+
 const SingleProductPage = async ({params}: SingleProductPageProps) => {
     const {productSlug} = await params;
-    const res = await fetch(`http://localhost:3000/api/products/${productSlug}`);
+
+    const res = await fetch(`http://localhost:3000/api/products/${productSlug}`,{
+        cache: "no-store"
+    });
     const product = await res.json();
     if(!product || product.error){
         notFound();
     }
+
+    const imagesData = await fetch(`http://localhost:3000/api/images/${product.id}`,{
+        cache: "no-store"
+    });
+    const images = await imagesData.json();
     return (
         <>
             <div className="mx-auto flex max-w-screen-2xl justify-center gap-x-16 pt-10 max-lg:flex-col items-center gap-y-5 px-5">
@@ -36,30 +46,15 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                         alt="main image"
                     />
                     <div className="flex justify-around mt-5 flext-wrap max-[500px]:justify-center max-[500px]:gap-x-1">
-                        <Image
-                        src={"/laptop 1.webp"}
-                        width={100}
-                        height={100}
-                        alt="main image"
-                        />
-                        <Image
-                        src={"/laptop 2.webp"}
-                        width={100}
-                        height={100}
-                        alt="laptop image"
-                        />
-                        <Image
-                        src={"/laptop 3.webp"}
-                        width={100}
-                        height={100}
-                        alt="laptop image"
-                        />
-                        <Image
-                        src={"/laptop 4.webp"}
-                        width={100}
-                        height={100}
-                        alt="laptop image"
-                        />
+                        {images.map((imageItem: ImageItem) => (
+                            <Image
+                                key={imageItem.imageID}
+                                src={`/${imageItem.image}`}
+                                width={100}
+                                height={100}
+                                alt="laptop image"
+                            />
+                        ))}
                     </div>
                     </div>
                     <div className="flex flex-col gap-y-7">

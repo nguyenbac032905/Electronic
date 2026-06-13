@@ -15,11 +15,13 @@ model Product{
     description String
     mainImage String
     slug String @unique
+    manufacturer String
+    category String
 }
 
 model Image {
   imageID   String @id @default(uuid())
-  articleID String
+  productID String
   image     String
 }
 

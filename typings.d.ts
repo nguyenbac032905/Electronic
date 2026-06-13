@@ -6,6 +6,8 @@ interface Product {
     description: string;
     mainImage: string;
     slug: string;
+    manufacturer: string;
+    category: string;
 }
 interface SingleProductPageProps {
     params: {
