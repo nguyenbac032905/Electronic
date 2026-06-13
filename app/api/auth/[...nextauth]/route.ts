@@ -36,7 +36,12 @@ export const authOptions: any = {
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_ID ?? "",
-            clientSecret: process.env.GOOGLE_SECRET ?? ""
+            clientSecret: process.env.GOOGLE_SECRET ?? "",
+            authorization: {
+                params: {
+                    prompt: "consent select_account"
+                }
+            }
         })
     ],
     callbacks: {
@@ -54,8 +59,8 @@ export const authOptions: any = {
                                 email: user.email!
                             }
                         });
-                        return true;
                     }
+                    return true;
                 } catch (error) {
                     console.log("Error saving user", error);
                     return false;
@@ -71,8 +76,8 @@ export const authOptions: any = {
                                 email: user.email!
                             }
                         })
-                        return true
                     }
+                    return true;
                 } catch (error) {
                     console.log("Error saving user", error);
                     return false;
