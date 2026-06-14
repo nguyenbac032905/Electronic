@@ -40,7 +40,7 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
             <div className="mx-auto flex max-w-screen-2xl justify-center gap-x-16 pt-10 max-lg:flex-col items-center gap-y-5 px-5">
                 <div>
                     <Image
-                        src={`/${product.mainImage}`}
+                        src={`/${product?.mainImage}`}
                         width={500}
                         height={500}
                         alt="main image"
@@ -48,8 +48,8 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                     <div className="flex justify-around mt-5 flext-wrap max-[500px]:justify-center max-[500px]:gap-x-1">
                         {images.map((imageItem: ImageItem) => (
                             <Image
-                                key={imageItem.imageID}
-                                src={`/${imageItem.image}`}
+                                key={imageItem?.imageID}
+                                src={`/${imageItem?.image}`}
                                 width={100}
                                 height={100}
                                 alt="laptop image"
@@ -59,10 +59,10 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                     </div>
                     <div className="flex flex-col gap-y-7">
                     <SingleProductRate reviews={2} />
-                    <h1 className="text-3xl">{product.title}</h1>
-                    <p className="text-xl font-semibold">${product.price}</p>
-                    <UrgencyText stock={90} />
-                    <StockAvailabillity stock={90} />
+                    <h1 className="text-3xl">{product?.title}</h1>
+                    <p className="text-xl font-semibold">${product?.price}</p>
+                    {product?.inStock && <UrgencyText stock={90} />}
+                    <StockAvailabillity stock={90} inStock={product?.inStock}/>
                     <SingleProductDynamicFields product={product}/>
                     <div className="flex flex-col gap-y-2">
                         <p className="flex items-center gap-x-2">

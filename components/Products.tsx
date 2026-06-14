@@ -1,7 +1,7 @@
 import {ProductItem} from "@/components";
 const Products = async ({slug}: any) => {
     const searchParams = await slug.searchParams;
-    const data = await fetch(`http://localhost:3000/api/products?filters[price][$lte]=${searchParams?.price||3000}`,{
+    const data = await fetch(`http://localhost:3000/api/products?filters[price][$lte]=${searchParams?.price||3000}&filters[rating][$lte]=${searchParams?.rating||0}`,{
         cache: "no-store"
     });
     const products = await data.json();

@@ -26,6 +26,7 @@ const Filters = () => {
             // params.set("logitech", inputCategory.box1.isChecked);
             // params.set("womenNewEdition", inputCategory.box2.isChecked);
             // params.set("minRating", inputCategory.ratingFilter.value);
+            params.set("rating", inputCategory.ratingFilter.value);
             params.set("price",inputCategory.priceFilter.value);
             replace(`${pathName}?${params}`,{scroll: false});
         }, 100);
@@ -54,7 +55,7 @@ const Filters = () => {
             <div className="divider"></div>
             <div className="flex flex-col gap-y-1">
                 <h3 className="text-xl mb-2">Price</h3>
-                <Range text="Max price: $" min={0} max={3000} step="" itemKey="priceFilter" inputCategory={inputCategory} setInputCategory={setInputCategory}/>
+                <Range text="Max price: $" min={0} max={3000} step="10" itemKey="priceFilter" inputCategory={inputCategory} setInputCategory={setInputCategory}/>
             </div>
             <div className="divider"></div>
             <div>

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {CustomButton} from "@/components";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import {CustomButton, ProductItemRating} from "@/components";
 const ProductItem = ({product}: {product: Product}) => {
     return (
         <div className="flex flex-col items-center gap-y-2">
@@ -12,13 +11,7 @@ const ProductItem = ({product}: {product: Product}) => {
                 <h2 className="text-lg">{product.title}</h2>
             </Link>
             <p>{product.price}</p>
-            <div className="flex">
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-                <AiFillStar />
-                <AiOutlineStar />
-            </div>
+            <ProductItemRating productRating={product.rating} />
             <CustomButton paddingX={0} paddingY={5} customWidth="full" textSize="sm" buttonType="button" text="Add to cart"/>
         </div>
     )
