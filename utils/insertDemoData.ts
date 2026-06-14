@@ -11,6 +11,7 @@ const demoProducts = [
         slug: "smart-phone-demo",
         manufacturer: "Samsung",
         category: "Smart phones",
+        inStock: 0
     },
     {
         id: "2",
@@ -22,6 +23,7 @@ const demoProducts = [
         slug: "slr-camera-demo",
         manufacturer: "Canon",
         category: "Cameras",
+        inStock: 0
     },
     {
         id: "3",
@@ -33,6 +35,7 @@ const demoProducts = [
         slug: "mixed-grinder-demo",
         manufacturer: "ZunVolt",
         category: "Mixer grinders",
+        inStock: 0
     },
     {
         id: "4",
@@ -44,6 +47,7 @@ const demoProducts = [
         slug: "phone-gimbal-demo",
         manufacturer: "Samsung",
         category: "Phone gimbals",
+        inStock: 1
     },
     {
         id: "5",
@@ -55,6 +59,7 @@ const demoProducts = [
         slug: "tablet-keyboard-demo",
         manufacturer: "Samsung",
         category: "Tablet keyboards",
+        inStock: 1
     },
     {
         id: "6",
@@ -66,6 +71,7 @@ const demoProducts = [
         slug: "wireless-earbuds-demo",
         manufacturer: "Samsung",
         category: "Earbuds",
+        inStock: 1
     },
     {
         id: "7",
@@ -77,6 +83,7 @@ const demoProducts = [
         slug: "party-speakers-demo",
         manufacturer: "SOWO",
         category: "Speakers",
+        inStock: 1
     },
     {
         id: "8",
@@ -88,6 +95,7 @@ const demoProducts = [
         slug: "slow-juicer-demo",
         manufacturer: "Bosch",
         category: "Juicers",
+        inStock: 1
     },
     {
         id: "9",
@@ -99,6 +107,7 @@ const demoProducts = [
         slug: "wireless-headphones-demo",
         manufacturer: "Sony",
         category: "Headphones",
+        inStock: 1
     },
     {
         id: "10",
@@ -110,6 +119,7 @@ const demoProducts = [
         slug: "smart-watch-demo",
         manufacturer: "Samsung",
         category: "Watches",
+        inStock: 1
     },
     {
         id: "11",
@@ -121,6 +131,7 @@ const demoProducts = [
         slug: "notebook-horizon-demo",
         manufacturer: "HP",
         category: "Laptops",
+        inStock: 1
     },
     {
         id: "12",
@@ -132,6 +143,7 @@ const demoProducts = [
         slug: "mens-trimmer-demo",
         manufacturer: "Gillete",
         category: "Trimmers",
+        inStock: 1
     },
     {
         id: "13",
@@ -143,6 +155,7 @@ const demoProducts = [
         slug: "sony-speaker-bluetooth",
         manufacturer: "Sony",
         category: "Speakers",
+        inStock: 10
     },
 ];
 
@@ -177,12 +190,12 @@ const insertDemoProducts = async () => {
     }
     console.log('Demo products inserted successfully!');
 
-    for(const image of demoProductImages){
-        await prisma.image.create({
-            data: image,
-        });
-    }
-    console.log("Demo images inserted successfully!");
+    // for(const image of demoProductImages){
+    //     await prisma.image.create({
+    //         data: image,
+    //     });
+    // }
+    // console.log("Demo images inserted successfully!");
 }
 
 insertDemoProducts()

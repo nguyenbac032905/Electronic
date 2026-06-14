@@ -3,8 +3,41 @@ import { NextRequest, NextResponse } from "next/server";
 import schema from "@/utils/schema";
 
 export async function GET(request: NextRequest) {
-    const users = await prisma.product.findMany({});
-    return NextResponse.json(users);
+    const dividerLocation = request.url.indexOf("?");
+    const queryArray = decodeURIComponent(request.url.substring(dividerLocation+1, request.url.length)).split("&");
+    let filterArray = [];
+    for(let i=0; i<queryArray.length; i++){
+        // if(queryArray[i].indexOf("price") !== -1){
+        //     filterType = queryArray[i].substring(queryArray[i].indexOf("price"), queryArray[i].indexOf("price") + "price".length);
+
+        //     const filterOperator = queryArray[i].substring(queryArray[i].indexOf("$")+1,queryArray[i].indexOf("$")+4);
+
+        //     const filterValue = queryArray[i].substring(queryArray[i].indexOf("=")+1, queryArray[i].length);
+
+        //     filterArray.push(filterType,filterOperator,filterValue);
+        // }
+        //su dung regex
+        const match = queryArray[i].match(/filters\[(.*?)\]\[\$(.*?)\]=(.*)/);
+        if (match) {
+            const [, filterType, filterOperator, filterValue] = match;
+            filterArray.push({filterType,filterOperator,filterValue});
+        }
+    }
+
+    let filterObj = {};
+    for(let item in filterArray){
+        filterObj = {
+            ...filterObj,
+            [filterArray[item].filterType]: {
+                [filterArray[item].filterOperator]: Number(filterArray[item].filterValue)
+            }
+        }
+    }
+
+    const products = await prisma.product.findMany({
+        where: filterObj
+    });
+    return NextResponse.json(products);
 }
 
 // export async function POST(request: NextRequest) {

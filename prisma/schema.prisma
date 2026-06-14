@@ -17,6 +17,7 @@ model Product{
     slug String @unique
     manufacturer String
     category String
+    inStock Int @default(1)
 }
 
 model Image {

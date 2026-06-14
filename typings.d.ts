@@ -8,6 +8,7 @@ interface Product {
     slug: string;
     manufacturer: string;
     category: string;
+    inStock: number
 }
 interface SingleProductPageProps {
     params: {

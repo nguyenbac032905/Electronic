@@ -29,11 +29,13 @@ export type AggregateProduct = {
 export type ProductAvgAggregateOutputType = {
   price: number | null
   rating: number | null
+  inStock: number | null
 }
 
 export type ProductSumAggregateOutputType = {
   price: number | null
   rating: number | null
+  inStock: number | null
 }
 
 export type ProductMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type ProductMinAggregateOutputType = {
   slug: string | null
   manufacturer: string | null
   category: string | null
+  inStock: number | null
 }
 
 export type ProductMaxAggregateOutputType = {
@@ -58,6 +61,7 @@ export type ProductMaxAggregateOutputType = {
   slug: string | null
   manufacturer: string | null
   category: string | null
+  inStock: number | null
 }
 
 export type ProductCountAggregateOutputType = {
@@ -70,6 +74,7 @@ export type ProductCountAggregateOutputType = {
   slug: number
   manufacturer: number
   category: number
+  inStock: number
   _all: number
 }
 
@@ -77,11 +82,13 @@ export type ProductCountAggregateOutputType = {
 export type ProductAvgAggregateInputType = {
   price?: true
   rating?: true
+  inStock?: true
 }
 
 export type ProductSumAggregateInputType = {
   price?: true
   rating?: true
+  inStock?: true
 }
 
 export type ProductMinAggregateInputType = {
@@ -94,6 +101,7 @@ export type ProductMinAggregateInputType = {
   slug?: true
   manufacturer?: true
   category?: true
+  inStock?: true
 }
 
 export type ProductMaxAggregateInputType = {
@@ -106,6 +114,7 @@ export type ProductMaxAggregateInputType = {
   slug?: true
   manufacturer?: true
   category?: true
+  inStock?: true
 }
 
 export type ProductCountAggregateInputType = {
@@ -118,6 +127,7 @@ export type ProductCountAggregateInputType = {
   slug?: true
   manufacturer?: true
   category?: true
+  inStock?: true
   _all?: true
 }
 
@@ -217,6 +227,7 @@ export type ProductGroupByOutputType = {
   slug: string
   manufacturer: string
   category: string
+  inStock: number
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
   _sum: ProductSumAggregateOutputType | null
@@ -252,6 +263,7 @@ export type ProductWhereInput = {
   slug?: Prisma.StringFilter<"Product"> | string
   manufacturer?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.StringFilter<"Product"> | string
+  inStock?: Prisma.IntFilter<"Product"> | number
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -264,6 +276,7 @@ export type ProductOrderByWithRelationInput = {
   slug?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
   _relevance?: Prisma.ProductOrderByRelevanceInput
 }
 
@@ -280,6 +293,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   mainImage?: Prisma.StringFilter<"Product"> | string
   manufacturer?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.StringFilter<"Product"> | string
+  inStock?: Prisma.IntFilter<"Product"> | number
 }, "id" | "slug">
 
 export type ProductOrderByWithAggregationInput = {
@@ -292,6 +306,7 @@ export type ProductOrderByWithAggregationInput = {
   slug?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
   _max?: Prisma.ProductMaxOrderByAggregateInput
@@ -312,6 +327,7 @@ export type ProductScalarWhereWithAggregatesInput = {
   slug?: Prisma.StringWithAggregatesFilter<"Product"> | string
   manufacturer?: Prisma.StringWithAggregatesFilter<"Product"> | string
   category?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  inStock?: Prisma.IntWithAggregatesFilter<"Product"> | number
 }
 
 export type ProductCreateInput = {
@@ -324,6 +340,7 @@ export type ProductCreateInput = {
   slug: string
   manufacturer: string
   category: string
+  inStock?: number
 }
 
 export type ProductUncheckedCreateInput = {
@@ -336,6 +353,7 @@ export type ProductUncheckedCreateInput = {
   slug: string
   manufacturer: string
   category: string
+  inStock?: number
 }
 
 export type ProductUpdateInput = {
@@ -348,6 +366,7 @@ export type ProductUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  inStock?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -360,6 +379,7 @@ export type ProductUncheckedUpdateInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  inStock?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProductCreateManyInput = {
@@ -372,6 +392,7 @@ export type ProductCreateManyInput = {
   slug: string
   manufacturer: string
   category: string
+  inStock?: number
 }
 
 export type ProductUpdateManyMutationInput = {
@@ -384,6 +405,7 @@ export type ProductUpdateManyMutationInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  inStock?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProductUncheckedUpdateManyInput = {
@@ -396,6 +418,7 @@ export type ProductUncheckedUpdateManyInput = {
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   manufacturer?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.StringFieldUpdateOperationsInput | string
+  inStock?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProductOrderByRelevanceInput = {
@@ -414,11 +437,13 @@ export type ProductCountOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
 }
 
 export type ProductAvgOrderByAggregateInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
 }
 
 export type ProductMaxOrderByAggregateInput = {
@@ -431,6 +456,7 @@ export type ProductMaxOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
 }
 
 export type ProductMinOrderByAggregateInput = {
@@ -443,11 +469,13 @@ export type ProductMinOrderByAggregateInput = {
   slug?: Prisma.SortOrder
   manufacturer?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
 }
 
 export type ProductSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  inStock?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -474,6 +502,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   slug?: boolean
   manufacturer?: boolean
   category?: boolean
+  inStock?: boolean
 }, ExtArgs["result"]["product"]>
 
 
@@ -488,9 +517,10 @@ export type ProductSelectScalar = {
   slug?: boolean
   manufacturer?: boolean
   category?: boolean
+  inStock?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "price" | "rating" | "description" | "mainImage" | "slug" | "manufacturer" | "category", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "price" | "rating" | "description" | "mainImage" | "slug" | "manufacturer" | "category" | "inStock", ExtArgs["result"]["product"]>
 
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
@@ -505,6 +535,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     slug: string
     manufacturer: string
     category: string
+    inStock: number
   }, ExtArgs["result"]["product"]>
   composites: {}
 }
@@ -883,6 +914,7 @@ export interface ProductFieldRefs {
   readonly slug: Prisma.FieldRef<"Product", 'String'>
   readonly manufacturer: Prisma.FieldRef<"Product", 'String'>
   readonly category: Prisma.FieldRef<"Product", 'String'>
+  readonly inStock: Prisma.FieldRef<"Product", 'Int'>
 }
     
 

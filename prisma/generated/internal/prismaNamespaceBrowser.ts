@@ -81,7 +81,8 @@ export const ProductScalarFieldEnum = {
   mainImage: 'mainImage',
   slug: 'slug',
   manufacturer: 'manufacturer',
-  category: 'category'
+  category: 'category',
+  inStock: 'inStock'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
