@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
             sortByObj = {}
             break;
     }
-
+    
     const products = await prisma.product.findMany({
         where: filterObj,
         orderBy: sortByObj

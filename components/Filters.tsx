@@ -16,7 +16,7 @@ const Filters = () => {
         box6: {text: "huawei",isChecked: true},
         box7: {text: "apple",isChecked: true},
         inStock: {text: "instock", isChecked: true},
-        outOfStock: {text: "outofstock", isChecked: false},
+        outOfStock: {text: "outofstock", isChecked: true},
         priceFilter: {text: "price", value: 3000},
         ratingFilter: {text: "rating", value: 5}
     });
@@ -26,12 +26,11 @@ const Filters = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             const params = new URLSearchParams();
-            
-            // params.set("logitech", inputCategory.box1.isChecked);
-            // params.set("womenNewEdition", inputCategory.box2.isChecked);
-            // params.set("minRating", inputCategory.ratingFilter.value);
-            params.set("rating", inputCategory.ratingFilter.value);
+
             params.set("price",inputCategory.priceFilter.value);
+            params.set("rating", inputCategory.ratingFilter.value);
+            params.set("inStock", inputCategory.inStock.isChecked);
+            params.set("outOfStock", inputCategory.outOfStock.isChecked);
             params.set("sort",sortBy);
             replace(`${pathName}?${params}`,{scroll: false});
         }, 100);

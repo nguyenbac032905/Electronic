@@ -1,7 +1,22 @@
 import {ProductItem} from "@/components";
 const Products = async ({slug}: any) => {
     const searchParams = await slug.searchParams;
-    const data = await fetch(`http://localhost:3000/api/products?filters[price][$lte]=${searchParams?.price||3000}&filters[rating][$lte]=${searchParams?.rating||0}&sort=${searchParams?.sort}`,{
+
+    const inStockNum = searchParams?.inStock === "true" ? 1 : 0;
+    const outOfStockNum = searchParams?.outOfStock === "true" ? 1 : 0;
+    let stockMode = "gte";
+
+    if (outOfStockNum === 1 && inStockNum === 1) {
+        stockMode = "lte";
+    } else if (inStockNum === 1) {
+        stockMode = "equals";
+    } else if (outOfStockNum === 1) {
+        stockMode = "lt";
+    } else {
+        stockMode = "gt";
+    }
+
+    const data = await fetch(`http://localhost:3000/api/products?filters[price][$lte]=${searchParams?.price||3000}&filters[rating][$gte]=${searchParams?.rating||0}&sort=${searchParams?.sort}&filters[inStock][$${stockMode}]=1`,{
         cache: "no-store"
     });
     const products = await data.json();
