@@ -1,4 +1,5 @@
 "use client"
+import { useSortStore } from "@/app/_zustand/sortStore";
 import {Checkbox, Range} from "@/components";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -19,6 +20,9 @@ const Filters = () => {
         priceFilter: {text: "price", value: 3000},
         ratingFilter: {text: "rating", value: 5}
     });
+
+    const {sortBy} = useSortStore();
+
     useEffect(() => {
         const timeout = setTimeout(() => {
             const params = new URLSearchParams();
@@ -28,10 +32,11 @@ const Filters = () => {
             // params.set("minRating", inputCategory.ratingFilter.value);
             params.set("rating", inputCategory.ratingFilter.value);
             params.set("price",inputCategory.priceFilter.value);
+            params.set("sort",sortBy);
             replace(`${pathName}?${params}`,{scroll: false});
         }, 100);
         return () => clearTimeout(timeout);
-    },[inputCategory]);
+    },[inputCategory,sortBy]);
     return (
         <div>
             <h3 className="text-2xl mb-2">Filters</h3>
