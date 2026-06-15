@@ -1,4 +1,5 @@
 import {
+    AddToWishlistBtn,
   ProductTabs,
   SingleProductDynamicFields,
   SingleProductRate,
@@ -65,48 +66,45 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                     <StockAvailabillity stock={90} inStock={product?.inStock}/>
                     <SingleProductDynamicFields product={product}/>
                     <div className="flex flex-col gap-y-2">
-                        <p className="flex items-center gap-x-2">
-                        <FaHeart />
-                        <span className="text-lg">Wish-list</span>
-                        </p>
+                        <AddToWishlistBtn product={product} />
                         <p className="text-lg">
                         SKU: <span className="ml-1">abcd-18</span>
                         </p>
                         <div className="flex gap-x-2 text-lg">
-                        <span>Share:</span>
-                        <div className="flex items-center gap-x-1 text-2xl">
-                            <FaSquareFacebook />
-                            <FaSquareXTwitter />
-                            <FaSquarePinterest />
-                        </div>
+                            <span>Share:</span>
+                            <div className="flex items-center gap-x-1 text-2xl">
+                                <FaSquareFacebook />
+                                <FaSquareXTwitter />
+                                <FaSquarePinterest />
+                            </div>
                         </div>
                         <div className="flex gap-x-2">
-                        <Image src={"/visa.svg"} width={50} height={50} alt="visa icon" />
-                        <Image
-                            src={"/mastercard.svg"}
-                            width={50}
-                            height={50}
-                            alt="mastercard icon"
-                        />
-                        <Image src={"/ae.svg"} width={50} height={50} alt="ae icon" />
-                        <Image
-                            src={"/paypal.svg"}
-                            width={50}
-                            height={50}
-                            alt="paypal icon"
-                        />
-                        <Image
-                            src={"/dinersclub.svg"}
-                            width={50}
-                            height={50}
-                            alt="dinersclub icon"
-                        />
-                        <Image
-                            src={"/discover.svg"}
-                            width={50}
-                            height={50}
-                            alt="discover icon"
-                        />
+                            <Image src={"/visa.svg"} width={50} height={50} alt="visa icon" />
+                            <Image
+                                src={"/mastercard.svg"}
+                                width={50}
+                                height={50}
+                                alt="mastercard icon"
+                            />
+                            <Image src={"/ae.svg"} width={50} height={50} alt="ae icon" />
+                            <Image
+                                src={"/paypal.svg"}
+                                width={50}
+                                height={50}
+                                alt="paypal icon"
+                            />
+                            <Image
+                                src={"/dinersclub.svg"}
+                                width={50}
+                                height={50}
+                                alt="dinersclub icon"
+                            />
+                            <Image
+                                src={"/discover.svg"}
+                                width={50}
+                                height={50}
+                                alt="discover icon"
+                            />
                         </div>
                     </div>
                 </div>

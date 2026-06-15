@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {HeaderTop,SearchInput, CartElement} from "@/components";
+import {HeaderTop,SearchInput, CartElement, HeartElement} from "@/components";
 import { FaCodeCompare, FaHeart } from "react-icons/fa6";
 import Link from "next/link";
 
@@ -16,10 +16,7 @@ const Header = () => {
                         <FaCodeCompare className="text-2xl"/>
                         <span className="block w-5 h-5 bg-custom-yellow rounded-full flex justify-center items-center absolute top-[-10px] right-[-20px]">21</span>
                     </div>
-                    <div className="relative">
-                        <FaHeart className="text-2xl"/>
-                        <span className="block w-5 h-5 bg-custom-yellow rounded-full flex justify-center items-center absolute top-[-10px] right-[-20px]">2</span>
-                    </div>
+                    <HeartElement />
                     <CartElement />
                 </div>
             </div>

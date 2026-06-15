@@ -33,3 +33,5 @@ export {default as ProductItemRating} from "./ProductItemRating";
 export {default as SortBy} from "./SortBy";
 export {default as SectionTitle} from "./SectionTitle";
 export {default as WishItem} from "./WishItem";
+export {default as AddToWishlistBtn} from "./AddToWishlistBtn";
+export {default as HeartElement} from "./HeartElement";

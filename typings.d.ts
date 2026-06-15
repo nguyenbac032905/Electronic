@@ -15,3 +15,10 @@ interface SingleProductPageProps {
         productSlug: string
     }
 }
+interface ProductInWishlist {
+    id: number;
+    title: string;
+    price: number;
+    image: string;
+    slug: string;
+  };
