@@ -61,7 +61,7 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                     <SingleProductRate reviews={2} />
                     <h1 className="text-3xl">{product?.title}</h1>
                     <p className="text-xl font-semibold">${product?.price}</p>
-                    {product?.inStock && <UrgencyText stock={90} />}
+                    {product?.inStock===1 && <UrgencyText stock={90} />}
                     <StockAvailabillity stock={90} inStock={product?.inStock}/>
                     <SingleProductDynamicFields product={product}/>
                     <div className="flex flex-col gap-y-2">

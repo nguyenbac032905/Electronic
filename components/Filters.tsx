@@ -18,7 +18,7 @@ const Filters = () => {
         inStock: {text: "instock", isChecked: true},
         outOfStock: {text: "outofstock", isChecked: true},
         priceFilter: {text: "price", value: 3000},
-        ratingFilter: {text: "rating", value: 5}
+        ratingFilter: {text: "rating", value: 3}
     });
 
     const {sortBy} = useSortStore();
@@ -32,6 +32,7 @@ const Filters = () => {
             params.set("inStock", inputCategory.inStock.isChecked);
             params.set("outOfStock", inputCategory.outOfStock.isChecked);
             params.set("sort",sortBy);
+            // params.set("category","smart-phones");
             replace(`${pathName}?${params}`,{scroll: false});
         }, 100);
         return () => clearTimeout(timeout);

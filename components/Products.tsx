@@ -4,7 +4,7 @@ const Products = async ({slug}: any) => {
 
     const inStockNum = searchParams?.inStock === "true" ? 1 : 0;
     const outOfStockNum = searchParams?.outOfStock === "true" ? 1 : 0;
-    let stockMode = "gte";
+    let stockMode = "lte";
 
     if (outOfStockNum === 1 && inStockNum === 1) {
         stockMode = "lte";
@@ -16,7 +16,7 @@ const Products = async ({slug}: any) => {
         stockMode = "gt";
     }
 
-    const data = await fetch(`http://localhost:3000/api/products?filters[price][$lte]=${searchParams?.price||3000}&filters[rating][$gte]=${searchParams?.rating||0}&sort=${searchParams?.sort}&filters[inStock][$${stockMode}]=1`,{
+    const data = await fetch(`http://localhost:3000/api/products?filters[price][$lte]=${searchParams?.price||3000}&filters[rating][$gte]=${searchParams?.rating||0}&filters[inStock][$${stockMode}]=1&${searchParams?.category ? `filters[category][$equals]=${searchParams.category}&` : ""}sort=${searchParams?.sort}`,{
         cache: "no-store"
     });
     const products = await data.json();

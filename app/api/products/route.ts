@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
     const dividerLocation = request.url.indexOf("?");
     const queryArray = decodeURIComponent(request.url.substring(dividerLocation+1, request.url.length)).split("&");
-
+    console.log(queryArray)
     let filterArray = [];
 
     let sortByValue = "defaultSort";
@@ -19,17 +19,17 @@ export async function GET(request: NextRequest) {
             sortByValue = queryArray[i].substring(queryArray[i].indexOf("=")+1,queryArray[i].length);
         }
     }
-
+    
     let filterObj = {};
-    for(let item in filterArray){
+    for (const item of filterArray) {
         filterObj = {
             ...filterObj,
-            [filterArray[item].filterType]: {
-                [filterArray[item].filterOperator]: Number(filterArray[item].filterValue)
+            [item.filterType]: {
+                [item.filterOperator]:item.filterType === "category" ? item.filterValue: Number(item.filterValue)
             }
-        }
+        };
     }
-
+    console.log(filterObj)
     let sortByObj = {};
     switch (sortByValue) {
         case "titleAsc":
