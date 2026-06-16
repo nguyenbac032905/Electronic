@@ -21,4 +21,8 @@ interface ProductInWishlist {
     price: number;
     image: string;
     slug: string;
-  };
+};
+interface AdminMainContentProps{
+    children: React.ReactNode;
+    isFooter: boolean
+}
