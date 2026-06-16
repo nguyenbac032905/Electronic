@@ -2,7 +2,7 @@ import { MainContentFooter } from "@/app/admin/_components";
 
 const MainContent = ({children, isFooter}: AdminMainContentProps) => {
     return (
-        <main className="w-full h-full bg-gray-50">
+        <main className="flex-1 h-full bg-gray-50 rounded-sm">
             {children}
             {isFooter && (
                 <div className="mx-4 mt-4">
