@@ -1,6 +1,6 @@
 import { Footer,FooterLinkGroup,FooterLink } from "flowbite-react";
 import { MdFacebook } from "react-icons/md";
-import { FaDribbble, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaDribbble, FaGithub, FaTwitter } from "react-icons/fa";
 
 const MainContentFooter = () => {
     return (

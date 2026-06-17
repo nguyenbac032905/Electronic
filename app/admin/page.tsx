@@ -1,4 +1,4 @@
-import {NavbarSidebar, NewProductsThisWeek, SaleThisWeek, UserSignupsThisWeek, VisitorsThisWeek} from "@/app/admin/_components";
+import { LatestCustomers, NavbarSidebar, NewProductsThisWeek, SaleThisWeek, SessionByCountry, UserSignupsThisWeek, VisitorsThisWeek} from "@/app/admin/_components";
 
 export default function DashboardPage() {
     return (
@@ -9,6 +9,14 @@ export default function DashboardPage() {
                     <NewProductsThisWeek />
                     <VisitorsThisWeek />
                     <UserSignupsThisWeek />
+                </div>
+                <div className="grid xl:grid-cols-3 xl: gap-4 grid-cols-1 mt-4">
+                    <div className="col-span-2">
+                        <SessionByCountry />
+                    </div>
+                    <div className="col-span-1">
+                        <LatestCustomers />
+                    </div>
                 </div>
             </div>
         </NavbarSidebar>

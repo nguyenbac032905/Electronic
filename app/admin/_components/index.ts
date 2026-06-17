@@ -12,3 +12,6 @@ export {default as VisitorsThisWeek} from "./VisitorsThisWeek";
 export {default as VisitorsChart} from "./VisitorsChart";
 export {default as UserSignupsThisWeek} from "./UserSignupsThisWeek";
 export {default as UserSigupsChart} from "./UserSignupsChart";
+export {default as LatestCustomers} from "./LatestCustomers";
+export {default as SessionByCountry} from "./SessionsByCountry";
+export {default as SessionByCountryMap} from "./SessionsByCountryMap";
