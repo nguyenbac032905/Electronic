@@ -1,6 +1,6 @@
 import {ProductItem} from "@/components";
 const ProductSection = async () => {
-    const data = await fetch("http://localhost:3000/api/products",{
+    const data = await fetch("http://localhost:3001/api/products",{
         cache: "no-store"
     });
     const products = await data.json();

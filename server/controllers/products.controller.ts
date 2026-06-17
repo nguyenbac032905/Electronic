@@ -1,7 +1,7 @@
-import prisma from "@/utils/db";
-import { NextRequest, NextResponse } from "next/server";
+import { Request, Response } from "express";
+import prisma from "../utils/db";
 
-export async function GET(request: NextRequest) {
+export const index = async (request: Request, response: Response) => {
     const dividerLocation = request.url.indexOf("?");
     const queryArray = decodeURIComponent(request.url.substring(dividerLocation+1, request.url.length)).split("&");
     console.log(queryArray)
@@ -62,5 +62,15 @@ export async function GET(request: NextRequest) {
         where: filterObj,
         orderBy: sortByObj
     });
-    return NextResponse.json(products);
+    return response.json(products);
+}
+export const getProductCategory = async (request: Request, response: Response) => {
+    const productSlug = request.params.productSlug as string;
+    const product = await prisma.product.findUnique({
+        where: {slug: productSlug}
+    });
+    if(!product){
+        return response.status(404).json({error: "404 Not Found"});
+    }
+    return response.status(200).json(product);
 }

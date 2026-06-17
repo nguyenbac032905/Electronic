@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Product{
+    id String @id @default(uuid())
+    title String
+    price Int @default(0)
+    rating Int @default(0)
+    description String
+    mainImage String
+    slug String @unique
+    manufacturer String
+    category String
+    inStock Int @default(1)
+}
+
+model Image {
+  imageID   String @id @default(uuid())
+  productID String
+  image     String
+}
+
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  password String?
+}
