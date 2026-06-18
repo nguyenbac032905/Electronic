@@ -7,8 +7,8 @@ const AdminSidebar = () => {
     const isEcommerceOpen = pathName.includes("ecommerce");
     const isUsersOpen = pathName.includes("users");
     return ( 
-        <Sidebar className="w-64 shrink-0">
-            <div className="flex flex-col justify-between py-2 h-[100vh] px-5 rounded-sm">
+        <Sidebar className="w-64 shrink-0 pt-4 m-0">
+            <div className="flex flex-col justify-between py-2 h-[100vh] px-5 rounded-sm bg-white">
                 <SidebarItems>
                     <SidebarItemGroup>
                         <SidebarItem href="/admin" icon={HiChartPie} className={pathName=="/admin" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Dashboard</SidebarItem>

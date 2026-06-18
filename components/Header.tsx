@@ -9,7 +9,7 @@ import { FaBell } from "react-icons/fa";
 const Header = () => {
     const pathName = usePathname();
     return (
-        <header>
+        <header className="shadow-sm">
             <HeaderTop />
             {pathName.startsWith("/admin") ? (
                 <div className="flex justify-between h-32 bg-white items-center px-16 max-[1320px]:px-10  max-w-screen-2xl mx-auto max-[400px]:px-5">
