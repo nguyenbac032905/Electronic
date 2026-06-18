@@ -1,4 +1,4 @@
-import { DatePicker } from "@/app/admin/_components";
+import { DatePicker } from "@/app/(dashboard)/admin/_components";
 const LatestCustomers = () => {
   return (
     <div className="mb-4 h-full rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6">

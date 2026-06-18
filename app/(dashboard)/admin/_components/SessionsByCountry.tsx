@@ -1,4 +1,4 @@
-import { DatePicker, SessionByCountryMap } from "@/app/admin/_components";
+import { DatePicker, SessionByCountryMap } from "@/app/(dashboard)/admin/_components";
 const SessionsByCountry = () => {
     return (
         <div className="mb-4 rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6 xl:mb-0 xl:p-8 2xl:col-span-2">

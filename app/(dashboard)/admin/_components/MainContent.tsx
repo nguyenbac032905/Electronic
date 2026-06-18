@@ -1,4 +1,4 @@
-import { MainContentFooter } from "@/app/admin/_components";
+import { MainContentFooter } from "@/app/(dashboard)/admin/_components";
 
 const MainContent = ({children, isFooter}: AdminMainContentProps) => {
     return (

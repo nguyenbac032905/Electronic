@@ -1,4 +1,4 @@
-import { DatePicker, UserSigupsChart } from "@/app/admin/_components";
+import { DatePicker, UserSigupsChart } from "@/app/(dashboard)/admin/_components";
 const UserSignupsThisWeek = () => {
     return (
         <div className="rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-6 xl:p-8">

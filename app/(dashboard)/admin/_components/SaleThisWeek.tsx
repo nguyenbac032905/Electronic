@@ -1,4 +1,4 @@
-import {DatePicker, SaleChart} from "@/app/admin/_components";
+import {DatePicker, SaleChart} from "@/app/(dashboard)/admin/_components";
 const SaleThisWeek = () => {
     return (
         <>

@@ -12,7 +12,7 @@ export const createImage = (
     if (!image || typeof image !== "string" || image.trim() === "") {
         errors.push("Image không hợp lệ");
     }
-    
+
     if (
         productID === undefined ||
         productID === null ||
@@ -34,35 +34,35 @@ export const createImage = (
 };
 
 export const updateImage = (
-  request: Request,
-  response: Response,
-  next: NextFunction
+    request: Request,
+    response: Response,
+    next: NextFunction
 ) => {
-  const { image, productID } = request.body;
+    const { image, productID } = request.body;
 
-  const errors: string[] = [];
+    const errors: string[] = [];
 
-  if (image !== undefined) {
-    if (typeof image !== "string" || image.trim() === "") {
-      errors.push("Image không hợp lệ");
+    if (image !== undefined) {
+        if (typeof image !== "string" || image.trim() === "") {
+            errors.push("Image không hợp lệ");
+        }
     }
-  }
 
-  if (productID !== undefined) {
-    if (
-      typeof productID !== "string" ||
-      productID.trim() === ""
-    ) {
-      errors.push("ProductID không hợp lệ");
+    if (productID !== undefined) {
+        if (
+            typeof productID !== "string" ||
+            productID.trim() === ""
+        ) {
+            errors.push("ProductID không hợp lệ");
+        }
     }
-  }
 
-  if (errors.length > 0) {
-    return response.status(400).json({
-      message: "Validation error",
-      errors,
-    });
-  }
+    if (errors.length > 0) {
+        return response.status(400).json({
+            message: "Validation error",
+            errors,
+        });
+    }
 
-  next();
+    next();
 };

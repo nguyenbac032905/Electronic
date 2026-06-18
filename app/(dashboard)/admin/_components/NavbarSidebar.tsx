@@ -1,4 +1,4 @@
-import {AdminNavbar, AdminSidebar, MainContent} from "@/app/admin/_components";
+import {AdminNavbar, AdminSidebar, MainContent} from "@/app/(dashboard)/admin/_components";
 
 const NavbarSidebar = ({children, isFooter=true}: AdminMainContentProps) => {
     return (

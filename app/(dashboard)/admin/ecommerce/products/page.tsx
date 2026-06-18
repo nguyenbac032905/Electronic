@@ -1,4 +1,4 @@
-import {NavbarSidebar} from "@/app/admin/_components";
+import {NavbarSidebar} from "@/app/(dashboard)/admin/_components";
 const AdminProductsPage = () => {
     return (
         <NavbarSidebar isFooter={true}>

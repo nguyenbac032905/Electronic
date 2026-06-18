@@ -1,7 +1,7 @@
 "use client"
 import { Sidebar,SidebarItems,SidebarItemGroup, SidebarItem,SidebarCollapse } from "flowbite-react";
 import { usePathname } from "next/navigation";
-import { HiChartPie,HiSearch,HiShoppingBag, HiUsers} from "react-icons/hi";
+import { HiChartPie,HiShoppingBag, HiUsers} from "react-icons/hi";
 const AdminSidebar = () => {
     const pathName = usePathname();
     const isEcommerceOpen = pathName.includes("ecommerce");

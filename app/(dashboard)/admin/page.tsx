@@ -1,4 +1,4 @@
-import { LatestCustomers, NavbarSidebar, NewProductsThisWeek, SaleThisWeek, SessionByCountry, UserSignupsThisWeek, VisitorsThisWeek} from "@/app/admin/_components";
+import { LatestCustomers, NavbarSidebar, NewProductsThisWeek, SaleThisWeek, SessionByCountry, UserSignupsThisWeek, VisitorsThisWeek} from "@/app/(dashboard)/admin/_components";
 
 export default function DashboardPage() {
     return (
