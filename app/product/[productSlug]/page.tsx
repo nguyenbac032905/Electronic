@@ -24,7 +24,7 @@ interface ImageItem {
 const SingleProductPage = async ({params}: SingleProductPageProps) => {
     const {productSlug} = await params;
 
-    const res = await fetch(`http://localhost:3000/api/products/${productSlug}`,{
+    const res = await fetch(`http://localhost:3001/api/products/detail/${productSlug}`,{
         cache: "no-store"
     });
     const product = await res.json();
@@ -32,7 +32,7 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
         notFound();
     }
 
-    const imagesData = await fetch(`http://localhost:3000/api/images/${product.id}`,{
+    const imagesData = await fetch(`http://localhost:3001/api/images/${product.id}`,{
         cache: "no-store"
     });
     const images = await imagesData.json();
@@ -46,17 +46,19 @@ const SingleProductPage = async ({params}: SingleProductPageProps) => {
                         height={500}
                         alt="main image"
                     />
-                    <div className="flex justify-around mt-5 flext-wrap max-[500px]:justify-center max-[500px]:gap-x-1">
-                        {images.map((imageItem: ImageItem) => (
-                            <Image
-                                key={imageItem?.imageID}
-                                src={`/${imageItem?.image}`}
-                                width={100}
-                                height={100}
-                                alt="laptop image"
-                            />
-                        ))}
-                    </div>
+                    {images?.length>0 && (
+                        <div className="flex justify-around mt-5 flext-wrap max-[500px]:justify-center max-[500px]:gap-x-1">
+                            {images?.map((imageItem: ImageItem) => (
+                                <Image
+                                    key={imageItem?.imageID}
+                                    src={`/${imageItem?.image}`}
+                                    width={100}
+                                    height={100}
+                                    alt="laptop image"
+                                />
+                            ))}
+                        </div>
+                    )}
                     </div>
                     <div className="flex flex-col gap-y-7">
                     <SingleProductRate reviews={2} />

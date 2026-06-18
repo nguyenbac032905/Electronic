@@ -64,8 +64,14 @@ export const index = async (request: Request, response: Response) => {
     });
     return response.json(products);
 }
-export const getProductCategory = async (request: Request, response: Response) => {
-    const productSlug = request.params.productSlug as string;
+export const getProductDetail = async (request: Request, response: Response) => {
+    if(typeof request.params.productSlug !== "string"){
+            return response.status(400).json({
+                error: "Product slug must be string",
+            });
+        }
+    const productSlug = request.params.productSlug;
+
     const product = await prisma.product.findUnique({
         where: {slug: productSlug}
     });
@@ -73,4 +79,122 @@ export const getProductCategory = async (request: Request, response: Response) =
         return response.status(404).json({error: "404 Not Found"});
     }
     return response.status(200).json(product);
+}
+export const searchProducts = async (request:Request, response: Response) => {
+    if(typeof request.query.keyword !== "string"){
+        return response.status(400).json({
+            error: "Keyword must be string",
+        });
+    }
+    const keyword = request.query.keyword;
+    if(!keyword){
+        return response.status(400).json({error: "Keyword is required"});
+    }
+    const products = await prisma.product.findMany({
+        where: {
+            OR: [
+                {
+                    title: {
+                        contains: keyword
+                    }
+                },
+                {
+                    description: {
+                        contains: keyword
+                    }
+                },
+                {
+                    manufacturer: {
+                        contains: keyword
+                    }
+                },
+                {
+                    category: {
+                        contains: keyword
+                    }
+                }
+            ]
+        }
+    });
+    return response.status(200).json(products);
+}
+export const createProduct = async (request: Request, response: Response) => {
+    try{
+        const { slug, title, mainImage, price, description, manufacturer, category, inStock } = request.body;
+        const product = await prisma.product.create({
+            data: {
+                slug,
+                title,
+                mainImage,
+                price,
+                description,
+                manufacturer,
+                category,
+                inStock
+            }
+        });
+        return response.status(201).json(product);
+    }catch(error){
+        return response.status(500).json({error: "Server error"});
+    }
+}
+export const updateProduct = async (request: Request, response: Response) => {
+    try {
+        const productSlug = request.params.productSlug;
+        if (typeof productSlug !== "string") {
+            return response.status(400).json({
+                error: "Product slug must be string",
+            });
+        }
+
+        const acceptUpdate = [
+            "slug",
+            "title",
+            "mainImage",
+            "price",
+            "description",
+            "manufacturer",
+            "category",
+            "inStock",
+        ];
+
+        const objectUpdate: any = {};
+
+        acceptUpdate.forEach((item) => {
+        if (request.body[item] !== undefined) {
+            objectUpdate[item] = request.body[item];
+        }
+        });
+
+        const product = await prisma.product.update({
+            where: { slug: productSlug },
+            data: objectUpdate,
+        });
+
+        return response.status(200).json(product);
+    } catch (error: any) {
+        if (error.code === "P2025") {
+            return response.status(404).json({ error: "Not found" });
+        }
+        return response.status(500).json({ error: "Server error" });
+    }
+};
+export const deleteProduct = async (request: Request, response: Response) => {
+    try {
+        const productSlug = request.params.productSlug
+        if(typeof productSlug !== "string"){
+            return response.status(400).json({error: "Product slug must be string"});
+        }
+        await prisma.product.delete({
+            where: {
+                slug: productSlug
+            }
+        })
+        return response.status(200).json({message: "Delete success"});
+    } catch (error: any) {
+        if (error.code === "P2025") {
+            return response.status(404).json({ error: "Not found" });
+        }
+        return response.status(500).json({error: "Server error"});
+    }
 }
