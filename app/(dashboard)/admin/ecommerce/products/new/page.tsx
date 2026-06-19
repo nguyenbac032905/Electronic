@@ -1,18 +1,11 @@
-"use client";
+"use client"
+import { NavbarSidebar } from "@/app/(dashboard)/admin/_components";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { NavbarSidebar } from "../../../_components";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import toast from "react-hot-toast";
-
-const ProductDetailPage = () => {
-    const params = useParams();
-    const slug = params.slug;
-
-    const [loading, setLoading] = useState(true);
+const NewProductPage = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
-    const router = useRouter();
-
     const [formData, setFormData] = useState({
         title: "",
         mainImage: "",
@@ -23,133 +16,47 @@ const ProductDetailPage = () => {
         description: "",
         slug: ""
     });
+    const router = useRouter();
 
-    useEffect(() => {
-        const fetchApi = async () => {
-            try {
-                const res = await fetch(
-                    `http://localhost:3001/api/products/${slug}`
-                );
-                const data = await res.json();
-                setFormData({
-                    title: data.title || "",
-                    mainImage: data.mainImage || "",
-                    price: data.price || 0,
-                    manufacturer: data.manufacturer || "",
-                    category: data.category || "",
-                    inStock: data.inStock || 1,
-                    description: data.description || "",
-                    slug: data.slug || ""
-                });
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchApi();
-    }, [slug]);
-
-    const handleChange = (
-        e: React.ChangeEvent<
-            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-        >
-    ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
+    const handleChange = (e: any) => {
+        const {name, value} = e.target;
+        setFormData(prev => ({
             ...prev,
-            [name]:
-                name === "price" || name === "inStock"
-                    ? Number(value)
-                    : value,
-        }));
+            [name]: name==="price"||name==="inStock" ? Number(value) : value
+        }))
     };
 
-    const handleUpdate = async (
-        e: React.FormEvent<HTMLFormElement>
-    ) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        try {
-            const form = new FormData();
-
-            form.append("title", formData.title);
-            form.append("price", String(formData.price));
-            form.append("manufacturer", formData.manufacturer);
-            form.append("category", formData.category);
-            form.append("description", formData.description);
-            form.append("inStock", String(formData.inStock));
-            form.append("slug",formData.slug);
-
-            if (imageFile) {
-                form.append("mainImage", imageFile);
-            }
-
-            const res = await fetch(
-                `http://localhost:3001/api/products/${slug}`,
-                {
-                    method: "PATCH",
-                    body: form,
-                }
-            );
-
-            if (res.ok) {
-                const data = await res.json();
-                setFormData({
-                    title: data.title || "",
-                    mainImage: data.mainImage || "",
-                    price: data.price || 0,
-                    manufacturer: data.manufacturer || "",
-                    category: data.category || "",
-                    inStock: data.inStock || 1,
-                    description: data.description || "",
-                    slug: data.slug || ""
-                });
-                toast.success("Product successfully updated");
-            }
-        } catch (error) {
-            console.log(error);
+        const form = new FormData();
+        form.append("title", formData.title);
+        form.append("price", String(formData.price));
+        form.append("manufacturer", formData.manufacturer);
+        form.append("category", formData.category);
+        form.append("description", formData.description);
+        form.append("inStock", String(formData.inStock));
+        form.append("slug",formData.slug);
+        if(imageFile){
+            form.append("mainImage", imageFile);
         }
-    };
 
-    const handleDelete = async () => {
-        const res = await fetch(`http://localhost:3001/api/products/${slug}`,{
-            method: "DELETE"
+        const res = await fetch(`http://localhost:3001/api/products`,{
+            method: "POST",
+            body: form
         });
+
         if(res.ok){
-            toast.success("Product successfully deleted");
+            toast.success("Product successfully created");
             router.push("/admin/ecommerce/products");
         }
     }
-
-    if (loading) {
-        return (
-            <NavbarSidebar isFooter={true}>
-                <div className="px-4 py-6">
-                    <div className="bg-white rounded-lg shadow xl:p-8 sm:p-6 p-4">
-                        <p className="text-center text-gray-500">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </NavbarSidebar>
-        );
-    }
-
     return (
         <NavbarSidebar isFooter={true}>
-            <div className="px-4 py-6">
-                <div className="mb-6">
-                    <h1 className="text-3xl font-bold text-gray-900">
-                        Product Details
-                    </h1>
-                    <p className="text-gray-600 mt-1">
-                        {formData.title}
-                    </p>
-                </div>
+            <div className="bg-white rounded-sm xl:p-8 sm:p-6 p-4 mt-4">
+                <h1 className="text-3xl font-semibold text-center pb-8 border-b border-gray-200">New Product</h1>
                 <form
-                    onSubmit={handleUpdate}
+                    onSubmit={handleSubmit}
                     className="bg-white rounded-lg shadow xl:p-8 sm:p-6 p-4"
                 >
                     <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 mb-8 pb-8 border-b border-gray-200">
@@ -161,7 +68,7 @@ const ProductDetailPage = () => {
                                 {formData.mainImage ? (
                                     <Image
                                         src={`/${formData.mainImage}`}
-                                        alt={formData.title}
+                                        alt="product image"
                                         width={250}
                                         height={300}
                                         className="object-cover rounded"
@@ -201,9 +108,9 @@ const ProductDetailPage = () => {
                                     </span>
                                     <input
                                         type="text"
-                                        name="title"
                                         value={formData.title}
                                         onChange={handleChange}
+                                        name="title"
                                         placeholder="Enter product name"
                                         className="input input-bordered w-full"
                                     />
@@ -214,9 +121,9 @@ const ProductDetailPage = () => {
                                     </span>
                                     <input
                                         type="text"
-                                        name="slug"
                                         value={formData.slug}
                                         onChange={handleChange}
+                                        name="slug"
                                         placeholder="Enter product slug"
                                         className="input input-bordered w-full"
                                     />
@@ -227,9 +134,9 @@ const ProductDetailPage = () => {
                                     </span>
                                     <input
                                         type="number"
-                                        name="price"
                                         value={formData.price}
                                         onChange={handleChange}
+                                        name="price"
                                         placeholder="Enter price"
                                         className="input input-bordered w-full"
                                     />
@@ -266,55 +173,40 @@ const ProductDetailPage = () => {
                                     </span>
                                     <select
                                         name="inStock"
-                                        value={formData.inStock}
-                                        onChange={handleChange}
                                         className="select select-bordered"
+                                        onChange={handleChange}
+                                        value={formData.inStock}
                                     >
                                         <option value={1}>Yes</option>
                                         <option value={0}>No</option>
                                     </select>
                                 </label>
+                                <label className="form-control w-full col-span-2">
+                                    <span className="label-text font-semibold mb-2">
+                                        Product Description
+                                    </span>
+                                    <textarea
+                                        name="description"
+                                        value={formData.description}
+                                        onChange={handleChange}
+                                        placeholder="Enter product description"
+                                        className="textarea textarea-bordered w-full h-32"
+                                    />
+                                </label>
                             </div>
                         </section>
                     </div>
-                    <section className="mb-8 pb-8 border-b border-gray-200">
-                        <h2 className="text-lg font-bold text-gray-900 mb-4">
-                            Description
-                        </h2>
-                        <textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            placeholder="Enter product description"
-                            className="textarea textarea-bordered w-full h-32"
-                        />
-                    </section>
                     <div className="flex flex-col sm:flex-row gap-3">
                         <button
                             type="submit"
                             className="flex-1 btn btn-primary font-semibold"
                         >
-                            Update Product
-                        </button>
-                        <button
-                            type="button"
-                            className="flex-1 btn btn-error font-semibold text-white"
-                            onClick={handleDelete}
-                        >
-                            Delete Product
-                        </button>
-                        <button
-                            type="button"
-                            className="flex-1 btn btn-outline font-semibold"
-                            onClick={() => router.push("/admin/ecommerce/products")}
-                        >
-                            Cancel
+                            Create Product
                         </button>
                     </div>
                 </form>
             </div>
         </NavbarSidebar>
-    );
-};
-
-export default ProductDetailPage;
+    )
+}
+export default NewProductPage;

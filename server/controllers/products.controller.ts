@@ -114,7 +114,7 @@ export const index = async (request: Request, response: Response) => {
         where,
         orderBy,
     });
-    console.log(products)
+    
     return response.status(200).json(products);
 };
 export const getProductDetail = async (request: Request, response: Response) => {

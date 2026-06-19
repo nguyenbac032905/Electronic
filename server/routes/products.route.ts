@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", controller.index);
 router.get("/:productSlug", controller.getProductDetail);
-router.post("/",validate.createProduct, controller.createProduct);
+router.post("/",validate.createProduct,middleware.uploadImage, controller.createProduct);
 router.patch("/:productSlug",validate.updateProduct,middleware.uploadImage, controller.updateProduct);
 router.delete("/:productSlug", controller.deleteProduct);
 
