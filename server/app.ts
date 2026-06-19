@@ -4,12 +4,15 @@ import dotenv from "dotenv";
 dotenv.config();
 import router from "./routes/index.route";
 import qs from "qs";
+import fileUpload from "express-fileupload";
 
 const app: Express = express();
 const port: number | string = process.env.PORT || 3001;
 app.use(cors({origin: 'http://localhost:3000'}));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.set("query parser", (str: string) => qs.parse(str));
 

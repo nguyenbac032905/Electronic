@@ -71,7 +71,7 @@ export const updateProduct = (request: Request, res: Response, next: NextFunctio
         manufacturer,
         category,
         inStock,
-    } = request.body;
+    } = request.body || {};
 
     const errors: string[] = [];
 
