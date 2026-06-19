@@ -1,11 +1,10 @@
 import {ProductItem} from "@/components";
 const Products = async ({slug}: any) => {
     const searchParams = await slug.searchParams;
-
+    //xu li query inStock
     const inStockNum = searchParams?.inStock === "true" ? 1 : 0;
     const outOfStockNum = searchParams?.outOfStock === "true" ? 1 : 0;
     let stockMode = "lte";
-
     if (outOfStockNum === 1 && inStockNum === 1) {
         stockMode = "lte";
     } else if (inStockNum === 1) {
@@ -15,8 +14,17 @@ const Products = async ({slug}: any) => {
     } else {
         stockMode = "gt";
     }
+    //them query
+    const query = new URLSearchParams();
+    query.append("filters[price][$lte]", String(searchParams?.price || 3000));
+    query.append("filters[rating][$gte]", String(searchParams?.rating || 0));
+    query.append(`filters[inStock][$${stockMode}]`,"1");
+    if (searchParams?.category) {
+        query.append("filters[category][$equals]",searchParams.category);
+    }
+    query.append("sort", searchParams?.sort || "defaultSort");
 
-    const data = await fetch(`http://localhost:3001/api/products?filters[price][$lte]=${searchParams?.price||3000}&filters[rating][$gte]=${searchParams?.rating||0}&filters[inStock][$${stockMode}]=1&${searchParams?.category ? `filters[category][$equals]=${searchParams.category}&` : ""}sort=${searchParams?.sort}`,{
+    const data = await fetch(`http://localhost:3001/api/products?${query.toString()}`,{
         cache: "no-store"
     });
     const products = await data.json();

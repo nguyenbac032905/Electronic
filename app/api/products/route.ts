@@ -62,5 +62,5 @@ export async function GET(request: NextRequest) {
         where: filterObj,
         orderBy: sortByObj
     });
-    return NextResponse.json(products);
+    // return NextResponse.json(products);
 }

@@ -1,6 +1,7 @@
 "use client";
 import { NavbarSidebar } from "@/app/(dashboard)/admin/_components";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 const AdminProductsPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -77,7 +78,7 @@ const AdminProductsPage = () => {
                                     </td>
                                     <td>${product?.price}</td>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">details</button>
+                                        <Link href={`/admin/ecommerce/products/${product?.slug}`} className="btn btn-ghost btn-xs">Details</Link>
                                     </th>
                                 </tr>
                             ))}

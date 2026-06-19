@@ -4,8 +4,7 @@ import * as valiidate from "../validates/products.validate";
 const router = express.Router();
 
 router.get("/", controller.index);
-router.get("/detail/:productSlug", controller.getProductDetail);
-router.get("/search", controller.searchProducts);
+router.get("/:productSlug", controller.getProductDetail);
 router.post("/",valiidate.createProduct, controller.createProduct);
 router.patch("/:productSlug",valiidate.updateProduct, controller.updateProduct);
 router.delete("/:productSlug", controller.deleteProduct);

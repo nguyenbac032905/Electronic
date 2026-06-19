@@ -5,8 +5,8 @@ interface Props {
 }
 const SearchPage = async ({ searchParams }: Props) => {
     const { search } = await searchParams;
-
-    const data = await fetch(`http://localhost:3001/api/products/search?keyword=${search || ""}`, {
+    console.log(search)
+    const data = await fetch(`http://localhost:3001/api/products?search=${search || ""}`, {
         cache: "no-store"
     });
 
