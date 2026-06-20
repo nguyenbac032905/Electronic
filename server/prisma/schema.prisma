@@ -31,3 +31,24 @@ model User {
   email String @unique
   password String?
 }
+
+model Order {
+  id             String  @id @default(uuid())
+  name           String
+  lastname       String
+  phone          String
+  email          String  @unique
+
+  company        String?
+  address        String
+  apartment      String?
+
+  city           String
+  country        String
+  postalCode     Int
+
+  cardName       String
+  cardNumber     String
+  expirationDate String
+  cvc            String
+}

@@ -32,3 +32,8 @@ export type Image = Prisma.ImageModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel

@@ -2,6 +2,8 @@
 import { SectionTitle } from "@/components";
 import { useProductStore } from "../_zustand/store";
 import Image from "next/image";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const productsTest = [
   {
@@ -40,9 +42,41 @@ const steps = [
 
 const CheckoutPage = () => {
     const {products, removeFromCart, calculateTotals, total} = useProductStore();
-    const handleSubmit = (e: any) => {
+    const [formData, setFormData] = useState({
+        name: "",
+        lastname: "",
+        phone: "",
+        email: "",
+        cardName: "",
+        cardNumber: "",
+        expirationDate: "",
+        cvc: "",
+        company: "",
+        address: "",
+        apartment: "",
+        city: "",
+        country: "",
+        postalCode: 0
+  });
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log(e.target.elements.address.value);
+        const res = await fetch(`http://localhost:3001/api/orders`,{
+            method: "POST",
+            headers: {
+                "Content-type": "Application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+        if(res.ok){
+            toast.success("Tạo đơn hàng thành công.");
+        }
+    };
+    const handleChange = (e: any) => {
+        const {name, value} = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name==="postalCode" ? Number(value) : value
+        }))
     }
     return (
         <div className="bg-white">
@@ -86,39 +120,59 @@ const CheckoutPage = () => {
                     <form onSubmit={handleSubmit}>
                         <section>
                             <h2 className="text-xl font-medium text-gray-900 ">Contact Information</h2>
-                            <div className="mt-6">
-                                <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                    Email Address:
-                                </label>
-                                <input type="email" id="email-address" name="email-address" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                            <div className="grid grid-cols-2 gap-x-4">
+                                <div className="mt-6">
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                                        Name:
+                                    </label>
+                                    <input type="text" onChange={handleChange} id="name" value={formData.name} name="name" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                </div>
+                                <div className="mt-6">
+                                    <label htmlFor="lastname" className="block text-sm font-medium text-gray-700">
+                                        Last name:
+                                    </label>
+                                    <input type="text" onChange={handleChange} id="lastname" value={formData.lastname} name="lastname" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                </div>
+                                <div className="mt-6">
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                        Email Address:
+                                    </label>
+                                    <input type="email" onChange={handleChange} id="email" value={formData.email} name="email" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                </div>
+                                <div className="mt-6">
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                                        Phone:
+                                    </label>
+                                    <input type="text" onChange={handleChange} id="phone" value={formData.phone} name="phone" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                </div>
                             </div>
                         </section>
                         <section>
                             <h2 className="text-xl font-medium text-gray-900 ">Payment details</h2>
                             <div className="grid sm:grid-cols-4 grid-cols-3 gap-x-4">
                                 <div className="mt-6 col-span-3 sm:col-span-4">
-                                    <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
-                                        Name on card:
+                                    <label htmlFor="cardName" className="block text-sm font-medium text-gray-700">
+                                        Card name:
                                     </label>
-                                    <input type="text" id="name-on-card" name="name-on-card" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.cardName} id="cardName" name="cardName" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-3 sm:col-span-4">
-                                    <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">
                                         Card number:
                                     </label>
-                                    <input type="text" id="card-number" name="card-number" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.cardNumber} id="cardNumber" name="cardNumber" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-2 sm:col-span-3">
-                                    <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="expirationDate" className="block text-sm font-medium text-gray-700">
                                         Expiration date (MM/YY):
                                     </label>
-                                    <input type="text" id="expiration-date" name="expiration-date" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.expirationDate} id="expirationDate" name="expirationDate" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-1 sm:col-span-1">
                                     <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
                                         CVC
                                     </label>
-                                    <input type="text" id="cvc" name="cvc" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.cvc} id="cvc" name="cvc" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                             </div> 
                         </section>
@@ -129,37 +183,37 @@ const CheckoutPage = () => {
                                     <label htmlFor="company" className="block text-sm font-medium text-gray-700">
                                         Company
                                     </label>
-                                    <input type="text" id="company" name="company" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.company} id="company" name="company" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-1 sm:col-span-3">
                                     <label htmlFor="address" className="block text-sm font-medium text-gray-700">
                                         Address:
                                     </label>
-                                    <input type="text" id="address" name="address" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.address} id="address" name="address" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-1 sm:col-span-3">
                                     <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
                                         Apartment, suite, etc:
                                     </label>
-                                    <input type="text" id="apartment" name="apartment" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.apartment} id="apartment" name="apartment" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                </div>
+                                <div className="mt-6 col-span-1 sm:col-span-1">
+                                    <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                                        Country:
+                                    </label>
+                                    <input type="text" onChange={handleChange} value={formData.country} id="country" name="country" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-1 sm:col-span-1">
                                     <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                                         City:
                                     </label>
-                                    <input type="text" id="city" name="city" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.city} id="city" name="city" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                                 <div className="mt-6 col-span-1 sm:col-span-1">
-                                    <label htmlFor="region" className="block text-sm font-medium text-gray-700">
-                                        State / Province:
-                                    </label>
-                                    <input type="text" id="region" name="region" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
-                                </div>
-                                <div className="mt-6 col-span-1 sm:col-span-1">
-                                    <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
                                         Postal code:
                                     </label>
-                                    <input type="text" id="postal-code" name="postal-code" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
+                                    <input type="text" onChange={handleChange} value={formData.postalCode} id="postalCode" name="postalCode" className="border border-gray-300 w-full rounded-md py-2 px-5 focus:outline-none focus:ring-inset focus:ring-blue-500 focus:ring-2 mt-1"/>
                                 </div>
                             </div> 
                         </section>

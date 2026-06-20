@@ -15,6 +15,23 @@ interface User {
     email:string;
     password: string | null;
 }
+interface Order {
+    id: string;
+    name: string;
+    lastname: string;
+    phone: string;
+    email: string;
+    company: string;
+    address: string;
+    apartment: string;
+    city: string;
+    country: string;
+    postalCode: number;
+    cardName: string;
+    cardNumber: string;
+    expirationDate: string;
+    cvc: string;
+}
 interface SingleProductPageProps {
     params: {
         productSlug: string

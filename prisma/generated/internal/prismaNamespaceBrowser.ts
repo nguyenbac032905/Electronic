@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Product: 'Product',
   Image: 'Image',
-  User: 'User'
+  User: 'User',
+  Order: 'Order'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -106,6 +107,27 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  lastname: 'lastname',
+  phone: 'phone',
+  email: 'email',
+  company: 'company',
+  address: 'address',
+  apartment: 'apartment',
+  city: 'city',
+  country: 'country',
+  postalCode: 'postalCode',
+  cardName: 'cardName',
+  cardNumber: 'cardNumber',
+  expirationDate: 'expirationDate',
+  cvc: 'cvc'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -151,4 +173,24 @@ export const UserOrderByRelevanceFieldEnum = {
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const OrderOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  lastname: 'lastname',
+  phone: 'phone',
+  email: 'email',
+  company: 'company',
+  address: 'address',
+  apartment: 'apartment',
+  city: 'city',
+  country: 'country',
+  cardName: 'cardName',
+  cardNumber: 'cardNumber',
+  expirationDate: 'expirationDate',
+  cvc: 'cvc'
+} as const
+
+export type OrderOrderByRelevanceFieldEnum = (typeof OrderOrderByRelevanceFieldEnum)[keyof typeof OrderOrderByRelevanceFieldEnum]
 
