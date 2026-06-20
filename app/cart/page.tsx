@@ -159,14 +159,9 @@ const CartPage = () => {
                     </dl>
 
                     <div className="mt-6">
-                    <CustomButton
-                        textSize="base"
-                        buttonType="submit"
-                        paddingX={4}
-                        paddingY={3}
-                        text="Checkout"
-                        customWidth="full"
-                    />
+                        <Link href="/checkout" className="block flex justify-center items-center w-full uppercase bg-white px-4 py-3 text-base border border-black border-gray-300 font-bold text-blue-600 shadow-sm hover:bg-black hover:bg-gray-100 focus:outline-none focus:ring-2">
+                            <span>Checkout</span>
+                        </Link>
                     </div>
                 </section>
                 </form>
