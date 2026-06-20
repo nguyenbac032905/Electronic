@@ -18,7 +18,7 @@ const AdminSidebar = () => {
                             <SidebarItem href="/admin/ecommerce/invoice" className={pathName=="/admin/ecommerce/invoice" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Invoice</SidebarItem>
                         </SidebarCollapse>
                         <SidebarCollapse label="Users" icon={HiUsers} open={isUsersOpen}>
-                            <SidebarItem href="/admin/users/list" className={pathName=="/admin/users/list" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Users list</SidebarItem>
+                            <SidebarItem href="/admin/users" className={pathName=="/admin/users" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Users list</SidebarItem>
                             <SidebarItem href="/admin/users/profile" className={pathName=="/admin/users/profile" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Profile</SidebarItem>
                             <SidebarItem href="/admin/users/feed" className={pathName=="/admin/users/feed" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Feed</SidebarItem>
                             <SidebarItem href="/admin/users/settings" className={pathName=="/admin/users/settings" ? "bg-gray-100 dark:bg-gray-700 px-5 " : "px-5"}>Settings</SidebarItem>

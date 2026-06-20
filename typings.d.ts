@@ -10,6 +10,11 @@ interface Product {
     category: string;
     inStock: number
 }
+interface User {
+    id: string;
+    email:string;
+    password: string | null;
+}
 interface SingleProductPageProps {
     params: {
         productSlug: string
