@@ -26,3 +26,27 @@ export const createOrder = async (request: Request, response: Response) => {
         return response.status(500).json({ error: "Server error" });
     }
 }
+export const index = async (request: Request, response: Response) => {
+    try {
+        const orders = await prisma.order.findMany({});
+        return response.status(200).json(orders);
+    } catch (error) {
+        return response.status(500).json({error: "Server error"});
+    }
+}
+export const detail = async (request: Request, response: Response) => {
+    try {
+        const id = request.params.orderID as string;
+        const order = await prisma.order.findUnique({
+            where: {
+                id : id
+            }
+        })
+        if(!order){
+            return response.status(404).json({error: "Order not found"});
+        }
+        return response.status(200).json(order);
+    } catch (error) {
+        return response.status(500).json({error: "Server error"});
+    }
+}
