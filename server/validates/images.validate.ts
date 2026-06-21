@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 export const createImage = (
     request: Request,
-    res: Response,
+    response: Response,
     next: NextFunction
 ) => {
     const { image, productID } = request.body;
@@ -24,7 +24,7 @@ export const createImage = (
     }
 
     if (errors.length > 0) {
-        return res.status(400).json({
+        return response.status(400).json({
             message: "Validation error",
             errors,
         });

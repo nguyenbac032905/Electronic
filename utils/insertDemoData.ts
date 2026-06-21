@@ -1,5 +1,47 @@
 import prisma from "./db";
 
+const demoCategories = [
+  {
+    name: "speakers",
+  },
+  {
+    name: "trimmers",
+  },
+  {
+    name: "laptops",
+  },
+  {
+    name: "watches",
+  },
+  {
+    name: "headphones",
+  },
+  {
+    name: "juicers",
+  },
+  {
+    name: "speakers",
+  },
+  {
+    name: "earbuds",
+  },
+  {
+    name: "tablet-keyboards",
+  },
+  {
+    name: "phone-gimbals",
+  },
+  {
+    name: "mixer-grinders",
+  },
+  {
+    name: "cameras",
+  },
+  {
+    name: "smart-phones",
+  },
+];
+
 const demoProducts = [
     {
         id: "1",
@@ -183,9 +225,14 @@ const demoProductImages = [
 ];
 
 const insertDemoProducts = async () => {
-    for(const product of demoProducts){
-        await prisma.product.create({
-            data: product
+    // for(const product of demoProducts){
+    //     await prisma.product.create({
+    //         data: product
+    //     })
+    // }
+    for(const category of demoCategories){
+        await prisma.category.create({
+            data: category
         })
     }
     console.log('Demo products inserted successfully!');

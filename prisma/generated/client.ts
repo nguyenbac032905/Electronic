@@ -61,3 +61,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Order = Prisma.OrderModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel

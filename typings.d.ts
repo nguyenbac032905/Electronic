@@ -32,6 +32,13 @@ interface Order {
     expirationDate: string;
     cvc: string;
 }
+interface Category {
+    id: string;
+    name: string;
+}
+interface CategoryFormData {
+    name: string;
+};
 interface SingleProductPageProps {
     params: {
         productSlug: string
