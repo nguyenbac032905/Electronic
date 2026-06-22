@@ -4,6 +4,7 @@ import productImagesRoutes from "./productImages.route";
 import userRoutes from "./user.route";
 import orderRoutes from "./orders.route";
 import categoryRoutes from "./categories.route";
+import orderItemRoutes from "./orderItem.route";
 const router = (app: Express) => {
     const PATH = "/api";
     app.use(PATH + "/products",productRoutes);
@@ -11,6 +12,7 @@ const router = (app: Express) => {
     app.use(PATH + "/users",userRoutes);
     app.use(PATH + "/orders",orderRoutes);
     app.use(PATH + "/categories",categoryRoutes);
+    app.use(PATH + "/order-items", orderItemRoutes);
 }
 
 export default router;

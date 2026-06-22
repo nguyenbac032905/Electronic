@@ -10,36 +10,61 @@ const steps = [
     {name: "Billing Information", href: "#", status: "current"},
     {name: "Confirmation", href: "#", status: "upcoming"},
 ];
-
+const initFormData = {
+    name: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    cardName: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvc: "",
+    company: "",
+    address: "",
+    apartment: "",
+    city: "",
+    country: "",
+    postalCode: 0
+}
 const CheckoutPage = () => {
-    const {products, removeFromCart, calculateTotals, total} = useProductStore();
-    const [formData, setFormData] = useState({
-        name: "",
-        lastname: "",
-        phone: "",
-        email: "",
-        cardName: "",
-        cardNumber: "",
-        expirationDate: "",
-        cvc: "",
-        company: "",
-        address: "",
-        apartment: "",
-        city: "",
-        country: "",
-        postalCode: 0
-  });
+    const {products, total,resetCart} = useProductStore();
+    const [formData, setFormData] = useState(initFormData);
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:3001/api/orders`,{
-            method: "POST",
-            headers: {
-                "Content-type": "Application/json"
-            },
-            body: JSON.stringify(formData)
-        });
-        if(res.ok){
-            toast.success("Tạo đơn hàng thành công.");
+        try {
+            const res = await fetch(`http://localhost:3001/api/orders`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+            if (!res.ok) {
+                throw new Error("Create order failed");
+            }
+            const order = await res.json();
+
+            await Promise.all(
+                products.map((product) => {
+                    return fetch(`http://localhost:3001/api/order-items`, {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            orderID: order.id,
+                            productId: product.id,
+                            price: product.price,
+                            quantity: product.amount
+                        })
+                    });
+                })
+            );
+            toast.success("Tạo đơn hàng thành công");
+            setFormData(initFormData);
+            resetCart();
+        } catch (error) {
+            toast.error("Có lỗi xảy ra");
         }
     };
     const handleChange = (e: any) => {

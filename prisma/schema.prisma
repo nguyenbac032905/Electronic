@@ -19,6 +19,7 @@ model Product{
     categoryID String
     inStock Int @default(1)
     category Category @relation(fields: [categoryID], references: [id])
+    orderItems OrderItem[]
 }
 
 model Image {
@@ -39,7 +40,7 @@ model Order {
   name           String
   lastname       String
   phone          String
-  email          String  @unique
+  email          String
 
   company        String?
   address        String
@@ -53,10 +54,21 @@ model Order {
   cardNumber     String
   expirationDate String
   cvc            String
+  orderItems OrderItem[]
 }
 
 model Category {
   id   String @id @default(uuid())
   name String
   products Product[]
+}
+
+model OrderItem {
+  id              String         @id @default(uuid())
+  order   Order @relation(fields: [orderID], references: [id])
+  orderID String
+  product         Product        @relation(fields: [productId], references: [id])
+  productId       String
+  price Int
+  quantity        Int
 }

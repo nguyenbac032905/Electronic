@@ -21,7 +21,7 @@ export const createOrder = async (request: Request, response: Response) => {
                 postalCode: request.body.postalCode
             }
         })
-        return response.status(201).json({ newOrder });
+        return response.status(201).json(newOrder);
     } catch (error) {
         return response.status(500).json({ error: "Server error" });
     }

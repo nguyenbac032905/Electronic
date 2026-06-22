@@ -21,6 +21,7 @@ export type Actions = {
     updateCartAmount: (id: number, quantity: number) => void;
     removeFromCart: (id: number) => void;
     calculateTotals: () => void;
+    resetCart: () => void;
 };
 
 export const useProductStore = create<State & Actions>()(
@@ -73,7 +74,14 @@ export const useProductStore = create<State & Actions>()(
                     })
                     return { products: state.products, allQuantity: amount, total: total };
                 })
-            }
+            },
+            resetCart: () => {
+                set({
+                    products: [],
+                    allQuantity: 0,
+                    total: 0
+                });
+            },
         }),
         {
             name: "products-storage",
