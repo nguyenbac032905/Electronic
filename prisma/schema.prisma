@@ -16,8 +16,9 @@ model Product{
     mainImage String
     slug String @unique
     manufacturer String
-    category String
+    categoryID String
     inStock Int @default(1)
+    category Category @relation(fields: [categoryID], references: [id])
 }
 
 model Image {
@@ -27,9 +28,10 @@ model Image {
 }
 
 model User {
-  id String @id @default(uuid())
-  email String @unique
-  password String?
+    id String @id @default(uuid())
+    email String @unique
+    password String?
+    role String @default("user")
 }
 
 model Order {
@@ -56,4 +58,5 @@ model Order {
 model Category {
   id   String @id @default(uuid())
   name String
+  products Product[]
 }

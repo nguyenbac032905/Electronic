@@ -34,4 +34,4 @@ export const getUserByID = async (request: Request,response: Response) => {
             error: "Server error"
         });
     }
-};
+}

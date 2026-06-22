@@ -5,35 +5,6 @@ import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const productsTest = [
-  {
-    id: 1,
-    title: "Micro Backpack",
-    href: "#",
-    price: "$70.00",
-    color: "Moss",
-    size: "5L",
-    amount: 1,
-    image:
-      "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:100/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s26-ultra-1.jpg",
-    imageAlt:
-      "Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.",
-  },
-  {
-    id: 2,
-    title: "Micro Backpack",
-    href: "#",
-    price: "$70.00",
-    color: "Moss",
-    size: "5L",
-    amount: 1,
-    image:
-      "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:300/q:100/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s26-ultra-1.jpg",
-    imageAlt:
-      "Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.",
-  }
-];
-
 const steps = [
     {name: "Cart", href:"#", status: "complete"},
     {name: "Billing Information", href: "#", status: "current"},
@@ -85,9 +56,9 @@ const CheckoutPage = () => {
                 <section className="col-span-1 p-8">
                     <h2 className="text-2xl font-medium text-gray-900 border-b border-gray-200 pb-3 mb-3">Product List:</h2>
                     <ul className="divide-y divide-gray-200">
-                        {productsTest.map((item,index) => (
+                        {products.map((item,index) => (
                             <li key={index} className="flex items-start space-x-4 py-6">
-                                <Image src={`${item.image}`} alt={item.title} width={80} height={80} className="h-20 w-20 rounded-md object-cover"/>
+                                <Image src={`/${item.image}`} alt={item.title} width={80} height={80} className="h-20 w-20 rounded-md object-cover"/>
                                 <div className="flex-auto space-y-1">
                                     <h3>{item.title}</h3>
                                     <p className="text-gray-500">Quantity: <span className="font-medium text-black">{item.amount}</span></p>

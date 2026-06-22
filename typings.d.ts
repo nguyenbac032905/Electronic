@@ -7,7 +7,7 @@ interface Product {
     mainImage: string;
     slug: string;
     manufacturer: string;
-    category: string;
+    category: Category;
     inStock: number
 }
 interface User {

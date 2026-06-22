@@ -10,68 +10,8 @@ const demoProducts = [
         mainImage: "product1.webp",
         slug: "smart-phone-demo",
         manufacturer: "Samsung",
-        category: "smart-phones",
+        categoryID: "480e2ad5-a448-40d5-9e32-68eb88621b9a",
         inStock: 0
-    },
-    {
-        id: "2",
-        title: "SLR camera",
-        price: 24,
-        rating: 0,
-        description: "This is slr description",
-        mainImage: "product2.webp",
-        slug: "slr-camera-demo",
-        manufacturer: "Canon",
-        category: "cameras",
-        inStock: 0
-    },
-    {
-        id: "3",
-        title: "Mixer grinder",
-        price: 25,
-        rating: 4,
-        description: "This is mixed grinder description",
-        mainImage: "product3.webp",
-        slug: "mixed-grinder-demo",
-        manufacturer: "ZunVolt",
-        category: "mixer-grinders",
-        inStock: 0
-    },
-    {
-        id: "4",
-        title: "Phone gimbal",
-        price: 21,
-        rating: 5,
-        description: "This is phone gimbal description",
-        mainImage: "product4.webp",
-        slug: "phone-gimbal-demo",
-        manufacturer: "Samsung",
-        category: "phone-gimbals",
-        inStock: 1
-    },
-    {
-        id: "5",
-        title: "Tablet keyboard",
-        price: 52,
-        rating: 4,
-        description: "This is tablet keyboard description",
-        mainImage: "product5.webp",
-        slug: "tablet-keyboard-demo",
-        manufacturer: "Samsung",
-        category: "tablet-keyboards",
-        inStock: 1
-    },
-    {
-        id: "6",
-        title: "Wireless earbuds",
-        price: 74,
-        rating: 3,
-        description: "This is earbuds description",
-        mainImage: "product6.webp",
-        slug: "wireless-earbuds-demo",
-        manufacturer: "Samsung",
-        category: "earbuds",
-        inStock: 1
     },
     {
         id: "7",
@@ -82,81 +22,9 @@ const demoProducts = [
         mainImage: "product7.webp",
         slug: "party-speakers-demo",
         manufacturer: "SOWO",
-        category: "speakers",
+        categoryID: "93dfc621-158c-4d03-9e6a-1d0a396654d2",
         inStock: 1
-    },
-    {
-        id: "8",
-        title: "Slow juicer",
-        price: 69,
-        rating: 5,
-        description: "Slow juicer desc",
-        mainImage: "product8.webp",
-        slug: "slow-juicer-demo",
-        manufacturer: "Bosch",
-        category: "juicers",
-        inStock: 1
-    },
-    {
-        id: "9",
-        title: "Wireless headphones",
-        price: 89,
-        rating: 3,
-        description: "This is wireless headphones description",
-        mainImage: "product9.webp",
-        slug: "wireless-headphones-demo",
-        manufacturer: "Sony",
-        category: "headphones",
-        inStock: 1
-    },
-    {
-        id: "10",
-        title: "Smart watch",
-        price: 64,
-        rating: 3,
-        description: "This is smart watch description",
-        mainImage: "product10.webp",
-        slug: "smart-watch-demo",
-        manufacturer: "Samsung",
-        category: "watches",
-        inStock: 1
-    },
-    {
-        id: "11",
-        title: "Notebook horizon",
-        price: 52,
-        rating: 5,
-        description: "This is notebook description",
-        mainImage: "product11.webp",
-        slug: "notebook-horizon-demo",
-        manufacturer: "HP",
-        category: "laptops",
-        inStock: 1
-    },
-    {
-        id: "12",
-        title: "Mens trimmer",
-        price: 54,
-        rating: 5,
-        description: "This is trimmer description",
-        mainImage: "product12.webp",
-        slug: "mens-trimmer-demo",
-        manufacturer: "Gillete",
-        category: "trimmers",
-        inStock: 1
-    },
-    {
-        id: "13",
-        title: "Sony Bluetooth Speaker",
-        price: 100,
-        rating: 5,
-        description: "This is Sony Bluetooth Speaker",
-        mainImage: "sony speaker image 1.jpg",
-        slug: "sony-speaker-bluetooth",
-        manufacturer: "Sony",
-        category: "speakers",
-        inStock: 10
-    },
+    }
 ];
 
 const demoProductImages = [
