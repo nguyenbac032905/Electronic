@@ -23,6 +23,7 @@ const Products = async ({slug}: any) => {
         query.append("filters[category][$equals]",searchParams.category);
     }
     query.append("sort", searchParams?.sort || "defaultSort");
+    query.append(`page`, String(searchParams?.page || 1));
 
     const data = await fetch(`http://localhost:3001/api/products?${query.toString()}`,{
         cache: "no-store"

@@ -1,10 +1,12 @@
 "use client"
+import { usePaginationStore } from "@/app/_zustand/paginationStore";
 import { useSortStore } from "@/app/_zustand/sortStore";
 import {Checkbox, Range} from "@/components";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const Filters = () => {
+    const {page} = usePaginationStore();
     const {replace} = useRouter();
     const pathName = usePathname();
     const [inputCategory,setInputCategory] = useState<any>({
@@ -32,11 +34,12 @@ const Filters = () => {
             params.set("inStock", inputCategory.inStock.isChecked);
             params.set("outOfStock", inputCategory.outOfStock.isChecked);
             params.set("sort",sortBy);
+            params.set("page", page.toString());
             // params.set("category","smart-phones");
             replace(`${pathName}?${params}`,{scroll: false});
         }, 100);
         return () => clearTimeout(timeout);
-    },[inputCategory,sortBy]);
+    },[inputCategory,sortBy,page]);
     return (
         <div>
             <h3 className="text-2xl mb-2">Filters</h3>

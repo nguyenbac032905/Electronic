@@ -5,6 +5,7 @@ export const index = async (request: Request, response: Response) => {
     const filters = request.query.filters as any;
     const sort = request.query.sort as any;
     const search = request.query.search as any;
+    const page = request.query.page ? Number(request.query.page): null;;
 
 
     let where: any = {};
@@ -110,10 +111,17 @@ export const index = async (request: Request, response: Response) => {
             break;
     }
     
-    const products = await prisma.product.findMany({
+    const queryOptions: any = {
         where,
         orderBy,
-    });
+    };
+
+    if (page) {
+        queryOptions.skip = (page - 1) * 1;
+        queryOptions.take = 1;
+    }
+
+    const products = await prisma.product.findMany(queryOptions);
     
     return response.status(200).json(products);
 };
