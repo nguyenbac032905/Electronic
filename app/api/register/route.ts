@@ -2,28 +2,52 @@ import prisma from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import {nanoid} from "nanoid";
+import { commonValidations, sanitizeInput } from "@/utils/validation";
+import { AppError, handleApiError } from "@/utils/errorHandler";
+import { registrationSchema } from "@/utils/schema";
 
 export const POST = async (request: NextRequest) => {
-    const {email, password} = await request.json();
+    // Get client IP for rate limiting
+    const clientIP = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+    // Check rate limit
+    if (!commonValidations.checkRateLimit(clientIP, 5, 15 * 60 * 1000)) {
+        throw new AppError("Too many registration attempts. Please try again later.", 429);
+    }
 
+    const body = await sanitizeInput.validateJsonInput(request);
+    const validationResult = registrationSchema.safeParse(body);
+    if (!validationResult.success) {
+      throw validationResult.error;
+    }
+
+    const { email, password } = validationResult.data;
     const existingUser = await prisma.user.findFirst({where: {email}});
 
     if(existingUser){
-        return new NextResponse("Email is already in use",{status: 400});
+        throw new AppError("Email is already in use", 400);
     }
 
     const hashedPassword = await bcrypt.hash(password,5);
 
     try{
-        await prisma.user.create({
+        const newUser = await prisma.user.create({
             data: {
                 id: nanoid() + "",
                 email,
                 password: hashedPassword
             }
-        })
-        return new NextResponse("User is regestered", {status: 200});
+        })  
+        return new NextResponse(
+            JSON.stringify({ 
+                message: "User registered successfully",
+                userId: newUser.id 
+            }),
+            { 
+                status: 200,
+                headers: { "Content-Type": "application/json" }
+            }
+        );
     }catch(error: any){
-        return new NextResponse(error,{status: 500});
+        return handleApiError(error);
     }
 }
