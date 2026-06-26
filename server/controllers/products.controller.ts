@@ -1,129 +1,163 @@
 import { Request, Response } from "express";
 import prisma from "../utils/db";
+import { Prisma } from "../prisma/generated/client";
+
+// ANTI TYPE CONFUSION (là người dùng cố tình gửi sai kiểu dữ liệu làm lỗi server)
+const safeNumber = (value: any): number | null => {
+  if (typeof value !== "string" && typeof value !== "number") return null;
+
+  const num = Number(value);
+  if (!Number.isFinite(num)) return null;
+
+  return num;
+};
+const safeBoolean = (value: any): boolean | null => {
+  if (value === true || value === false) return value;
+
+  if (value === "true") return true;
+  if (value === "false") return false;
+
+  return null;
+};
+const safeString = (value: any): string | null => {
+  if (typeof value !== "string") return null;
+
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+};
+const isPlainObject = (obj: any): boolean => {
+  return obj && typeof obj === "object" && obj.constructor === Object;
+};
+const safePage = (value: any): number => {
+  const num = Number(value);
+  if (!Number.isFinite(num) || num < 1) return 1;
+  return Math.floor(num);
+};
+
+
+// ANTI NOSQL INJECTION (là người dùng gửi các object kèm toán tử lên để lấy ra thông tin không cho phép)
+//white list
+const ALLOWED_FIELDS = ["price", "inStock", "category", "manufacturer"];
+const ALLOWED_OPERATORS = ["$lte","$gte","$lt","$gt","$equals","$contains"];
+const ALLOWED_SORT = ["titleAsc", "titleDesc", "lowPrice", "highPrice"];
+
+const isValidField = (field: string) => ALLOWED_FIELDS.includes(field);
+const isValidOperator = (op: string) => ALLOWED_OPERATORS.includes(op);
+const isValidSort = (sort: string) => ALLOWED_SORT.includes(sort);
+
+//sort an toàn
+const buildSafeSort = (sort?: string): Prisma.ProductOrderByWithRelationInput => {
+  if (!sort || !isValidSort(sort)) return {};
+
+  switch (sort) {
+    case "titleAsc":
+      return { title: "asc" };
+
+    case "titleDesc":
+      return { title: "desc" };
+
+    case "lowPrice":
+      return { price: "asc" };
+
+    case "highPrice":
+      return { price: "desc" };
+
+    default:
+      return {};
+  }
+};
+
+// MAIN SECURITY LOGIC (WHERE BUILDER)
+const buildSafeWhere = (filters: any, search?: string) => {
+  const where: any = {};
+
+  // SEARCH SAFE (ANTI INJECTION)
+
+  const cleanSearch = safeString(search);
+
+  if (cleanSearch) {
+    where.OR = [
+      { title: { contains: cleanSearch } },
+      { description: { contains: cleanSearch } },
+      { manufacturer: { contains: cleanSearch } },
+      { category: { contains: cleanSearch } },
+    ];
+  }
+
+  // FILTER SAFE (WHITELIST + TYPE SAFE)
+
+  if (filters && isPlainObject(filters)) {
+    for (const field in filters) {
+      if (!isValidField(field)) continue;
+
+      const ops = filters[field];
+      if (!isPlainObject(ops)) continue;
+
+      where[field] = {};
+
+      for (const op in ops) {
+        if (!isValidOperator(op)) continue;
+
+        let value = ops[op];
+
+        // TYPE SAFE CAST
+        if (field === "price" || field === "inStock") {
+          value = safeNumber(value);
+        } else {
+          value = safeString(value);
+        }
+
+        if (value === null) continue;
+
+        switch (op) {
+          case "$lte":
+            where[field].lte = value;
+            break;
+
+          case "$gte":
+            where[field].gte = value;
+            break;
+
+          case "$lt":
+            where[field].lt = value;
+            break;
+
+          case "$gt":
+            where[field].gt = value;
+            break;
+
+          case "$equals":
+            where[field].equals = value;
+            break;
+
+          case "$contains":
+            where[field].contains = value;
+            break;
+        }
+      }
+    }
+  }
+
+  return where;
+};
 
 export const index = async (request: Request, response: Response) => {
-    const filters = request.query.filters as any;
-    const sort = request.query.sort as any;
-    const search = request.query.search as any;
-    const page = request.query.page ? Number(request.query.page): null;;
+  const filters = request.query.filters;
+  const sort = request.query.sort as string;
+  const search = request.query.search as string;
+  const page = safePage(request.query.page);
 
+  const where = buildSafeWhere(filters, search);
+  const orderBy = buildSafeSort(sort);
 
-    let where: any = {};
-    let orderBy: any = {};
-    
-    //search
-    if (search) {
-        where.OR = [
-            {
-                title: {
-                    contains: search
-                },
-            },
-            {
-                description: {
-                    contains: search
-                },
-            },
-            {
-                manufacturer: {
-                    contains: search
-                },
-            },
-            {
-                category: {
-                    contains: search
-                },
-            },
-        ];
-    }
+  const products = await prisma.product.findMany({
+    where,
+    orderBy,
+    skip: (page - 1) * 10,
+    take: 10,
+  });
 
-    // filter
-    if (filters) {
-        for (const field in filters) {
-            const operators = filters[field];
-
-            if (!where[field]) {
-                where[field] = {};
-            }
-
-            for (const operator in operators) {
-                const value = operators[operator];
-
-                switch (operator) {
-                    case "$lte":
-                        where[field].lte = Number(value);
-                        break;
-
-                    case "$gte":
-                        where[field].gte = Number(value);
-                        break;
-
-                    case "$equals":
-                        where[field].equals = isNaN(Number(value))
-                            ? value
-                            : Number(value);
-                        break;
-
-                    case "$lt":
-                        where[field].lt = Number(value);
-                        break;
-
-                    case "$gt":
-                        where[field].gt = Number(value);
-                        break;
-
-                    case "$contains":
-                        where[field].contains = value;
-                        break;
-                }
-            }
-        }
-    }
-
-    //sort
-    switch (sort) {
-        case "titleAsc":
-            orderBy = {
-                title: "asc",
-            };
-            break;
-
-        case "titleDesc":
-            orderBy = {
-                title: "desc",
-            };
-            break;
-
-        case "lowPrice":
-            orderBy = {
-                price: "asc",
-            };
-            break;
-
-        case "highPrice":
-            orderBy = {
-                price: "desc",
-            };
-            break;
-
-        default:
-            orderBy = {};
-            break;
-    }
-    
-    const queryOptions: any = {
-        where,
-        orderBy,
-    };
-
-    if (page) {
-        queryOptions.skip = (page - 1) * 1;
-        queryOptions.take = 1;
-    }
-
-    const products = await prisma.product.findMany(queryOptions);
-    
-    return response.status(200).json(products);
+  return response.status(200).json(products);
 };
 export const getProductDetail = async (request: Request, response: Response) => {
     if (typeof request.params.productSlug !== "string") {
